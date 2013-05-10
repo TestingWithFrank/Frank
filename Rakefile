@@ -1,6 +1,8 @@
 require File.expand_path( '../gem/lib/frank-cucumber/version', __FILE__ )
 PRODUCT_VERSION=Frank::Cucumber::VERSION
 
+require File.expand_path( '../travis/rake_tasks', __FILE__ )
+
 def discover_latest_sdk_for(platform)
   `xcodebuild -showsdks | grep -o "#{platform}.*$" | sort | tail -n 1`.chomp
 end
