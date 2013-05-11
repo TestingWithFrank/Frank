@@ -37,6 +37,8 @@ module Launcher
 
     enforce(app_path)
 
+    puts "LAUNCHING APP: #{app_path}"
+
     # kill the app if it's already running, just in case this helps 
     # reduce simulator flakiness when relaunching the app. Use a timeout of 5 seconds to 
     # prevent us hanging around for ages waiting for the ping to fail if the app isn't running
