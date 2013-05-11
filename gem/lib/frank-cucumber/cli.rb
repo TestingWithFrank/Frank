@@ -112,6 +112,10 @@ module Frank
       exit $?.exitstatus if not $?.success?
 
       app = Dir.glob("#{build_output_dir}/**/*.app").delete_if { |x| x =~ /\/#{app_bundle_name}$/ }
+      puts 'APPS GLOB:'
+      app.each do |p|
+        puts File.expand_path(p)
+      end
       app = app.first
       FileUtils.cp_r("#{app}/.", frankified_app_dir)
 
