@@ -116,8 +116,10 @@ module Frank
       app.each do |p|
         puts File.expand_path(p)
       end
+      run "ls -l #{build_output_dir}"
       app = app.first
       FileUtils.cp_r("#{app}/.", frankified_app_dir)
+      run "ls -l #{frankified_app_dir}"
 
       if build_mac
         in_root do
