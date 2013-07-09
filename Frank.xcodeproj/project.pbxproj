@@ -137,12 +137,12 @@
 		C110E495178BD22100CFE509 /* BasicRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E492178BD21E00CFE509 /* BasicRoute.h */; };
 		C110E496178BD22100CFE509 /* BasicRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E493178BD21F00CFE509 /* BasicRoute.m */; };
 		C110E497178BD22100CFE509 /* BasicRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E493178BD21F00CFE509 /* BasicRoute.m */; };
+		C110E49A178BDA6000CFE509 /* VersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E498178BDA5E00CFE509 /* VersionRoute.h */; };
+		C110E49B178BDA6000CFE509 /* VersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E498178BDA5E00CFE509 /* VersionRoute.h */; };
+		C110E49C178BDA6000CFE509 /* VersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E499178BDA5F00CFE509 /* VersionRoute.m */; };
+		C110E49D178BDA6000CFE509 /* VersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E499178BDA5F00CFE509 /* VersionRoute.m */; };
 		C177A4CC1632319A0081DF77 /* AnyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = C177A4CA1632319A0081DF77 /* AnyJSON.h */; };
 		C177A4CD1632319A0081DF77 /* AnyJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = C177A4CB1632319A0081DF77 /* AnyJSON.m */; };
-		C189EF1E16BB5A8100F8236D /* VersionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = C189EF1C16BB5A8000F8236D /* VersionCommand.h */; };
-		C189EF1F16BB5A8100F8236D /* VersionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = C189EF1C16BB5A8000F8236D /* VersionCommand.h */; };
-		C189EF2016BB5A8100F8236D /* VersionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = C189EF1D16BB5A8000F8236D /* VersionCommand.m */; };
-		C189EF2116BB5A8100F8236D /* VersionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = C189EF1D16BB5A8000F8236D /* VersionCommand.m */; };
 		C18A5EF0160D4AB400DC25F6 /* ImageCaptureRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C18A5EEE160D4AB400DC25F6 /* ImageCaptureRoute.h */; };
 		C18A5EF1160D4AB400DC25F6 /* ImageCaptureRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C18A5EEF160D4AB400DC25F6 /* ImageCaptureRoute.m */; };
 		C18A5EF5160D4AD300DC25F6 /* UIView+ImageCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = C18A5EF3160D4AD300DC25F6 /* UIView+ImageCapture.h */; };
@@ -397,11 +397,11 @@
 		C110E471178A11B800CFE509 /* DeviceRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceRoute.m; sourceTree = "<group>"; };
 		C110E492178BD21E00CFE509 /* BasicRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicRoute.h; sourceTree = "<group>"; };
 		C110E493178BD21F00CFE509 /* BasicRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicRoute.m; sourceTree = "<group>"; };
+		C110E498178BDA5E00CFE509 /* VersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionRoute.h; sourceTree = "<group>"; };
+		C110E499178BDA5F00CFE509 /* VersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionRoute.m; sourceTree = "<group>"; };
 		C177A4CA1632319A0081DF77 /* AnyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyJSON.h; path = AnyJSON/AnyJSON.h; sourceTree = "<group>"; };
 		C177A4CB1632319A0081DF77 /* AnyJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnyJSON.m; path = AnyJSON/AnyJSON.m; sourceTree = "<group>"; };
 		C177A4CE163234B60081DF77 /* JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		C189EF1C16BB5A8000F8236D /* VersionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionCommand.h; sourceTree = "<group>"; };
-		C189EF1D16BB5A8000F8236D /* VersionCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionCommand.m; sourceTree = "<group>"; };
 		C18A5EEE160D4AB400DC25F6 /* ImageCaptureRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCaptureRoute.h; sourceTree = "<group>"; };
 		C18A5EEF160D4AB400DC25F6 /* ImageCaptureRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCaptureRoute.m; sourceTree = "<group>"; };
 		C18A5EF3160D4AD300DC25F6 /* UIView+ImageCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ImageCapture.h"; sourceTree = "<group>"; };
@@ -711,8 +711,6 @@
 				30AC65A6165C3A4D00DEB0AB /* OSXKeyboardCommand.m */,
 				30C544AF167E4D9E0034F49C /* SuccessCommand.h */,
 				30C544B0167E4D9E0034F49C /* SuccessCommand.m */,
-				C189EF1C16BB5A8000F8236D /* VersionCommand.h */,
-				C189EF1D16BB5A8000F8236D /* VersionCommand.m */,
 				30E82E3017128AB500E5BC7C /* ResolutionCommand.h */,
 			);
 			name = Commands;
@@ -742,6 +740,8 @@
 				C110E493178BD21F00CFE509 /* BasicRoute.m */,
 				C110E470178A11B700CFE509 /* DeviceRoute.h */,
 				C110E471178A11B800CFE509 /* DeviceRoute.m */,
+				C110E498178BDA5E00CFE509 /* VersionRoute.h */,
+				C110E499178BDA5F00CFE509 /* VersionRoute.m */,
 			);
 			name = Routing;
 			sourceTree = "<group>";
@@ -844,12 +844,12 @@
 				30AC65A4165C39FF00DEB0AB /* FrankMac-Prefix.pch in Headers */,
 				30AC65A7165C3A4D00DEB0AB /* OSXKeyboardCommand.h in Headers */,
 				30C544B2167E4D9E0034F49C /* SuccessCommand.h in Headers */,
-				C189EF1F16BB5A8100F8236D /* VersionCommand.h in Headers */,
 				30E82E3317128AB500E5BC7C /* ResolutionCommand.h in Headers */,
 				C110E466178A043200CFE509 /* RoutingEntry.h in Headers */,
 				C110E46D178A0C5D00CFE509 /* HttpRequestContext.h in Headers */,
 				C110E473178A11B900CFE509 /* DeviceRoute.h in Headers */,
 				C110E495178BD22100CFE509 /* BasicRoute.h in Headers */,
+				C110E49B178BDA6000CFE509 /* VersionRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,13 +889,13 @@
 				C177A4CC1632319A0081DF77 /* AnyJSON.h in Headers */,
 				9B3E52AF163FB98300EB24C2 /* LocationCommand.h in Headers */,
 				30C544B1167E4D9E0034F49C /* SuccessCommand.h in Headers */,
-				C189EF1E16BB5A8100F8236D /* VersionCommand.h in Headers */,
 				30E82E3217128AB500E5BC7C /* ResolutionCommand.h in Headers */,
 				0626BFAE174300240020B33B /* DumpCommandRoute.h in Headers */,
 				C110E465178A043200CFE509 /* RoutingEntry.h in Headers */,
 				C110E46C178A0C5D00CFE509 /* HttpRequestContext.h in Headers */,
 				C110E472178A11B900CFE509 /* DeviceRoute.h in Headers */,
 				C110E494178BD22100CFE509 /* BasicRoute.h in Headers */,
+				C110E49A178BDA6000CFE509 /* VersionRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1137,12 +1137,12 @@
 				3072649F165812FB00815A1A /* ViewJSONSerializer.m in Sources */,
 				30C544B4167E4D9E0034F49C /* SuccessCommand.m in Sources */,
 				304A0C821699105600150BE8 /* NSApplication+FrankAutomation.m in Sources */,
-				C189EF2116BB5A8100F8236D /* VersionCommand.m in Sources */,
 				30E82E3517128AB500E5BC7C /* ResolutionCommand.m in Sources */,
 				C110E468178A043200CFE509 /* RoutingEntry.m in Sources */,
 				C110E46F178A0C5D00CFE509 /* HttpRequestContext.m in Sources */,
 				C110E475178A11B900CFE509 /* DeviceRoute.m in Sources */,
 				C110E497178BD22100CFE509 /* BasicRoute.m in Sources */,
+				C110E49D178BDA6000CFE509 /* VersionRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,7 +1267,6 @@
 				C177A4CD1632319A0081DF77 /* AnyJSON.m in Sources */,
 				9B3E52B0163FB98300EB24C2 /* LocationCommand.m in Sources */,
 				30C544B3167E4D9E0034F49C /* SuccessCommand.m in Sources */,
-				C189EF2016BB5A8100F8236D /* VersionCommand.m in Sources */,
 				30E82E3417128AB500E5BC7C /* ResolutionCommand.m in Sources */,
 				387BFA7D17036DDA007B9F17 /* UISlider+PublicAutomation.m in Sources */,
 				0626BFAF174300240020B33B /* DumpCommandRoute.m in Sources */,
@@ -1276,6 +1275,7 @@
 				C110E46E178A0C5D00CFE509 /* HttpRequestContext.m in Sources */,
 				C110E474178A11B900CFE509 /* DeviceRoute.m in Sources */,
 				C110E496178BD22100CFE509 /* BasicRoute.m in Sources */,
+				C110E49C178BDA6000CFE509 /* VersionRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

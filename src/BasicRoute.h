@@ -11,12 +11,7 @@
 
 @class HTTPDataResponse;
 
-@interface BasicRoute : NSObject<HTTPRequestHandler>{
-    HTTPRequestContext *_context;
-}
-
-- (id)initWithContext:(HTTPRequestContext *)context;
-
+@interface BasicRoute : NSObject<HTTPRequestHandler>
 - (HTTPDataResponse *)responseWithJsonBody:(id)json;
 - (HTTPDataResponse *)responseWithStringBody:(NSString *)body;
 @end

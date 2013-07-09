@@ -11,7 +11,7 @@
 @interface RoutingEntry() {
     NSString *_path;
     NSArray *_supportedMethods;
-    Class _handlerClass;
+    HandlerCreator _handlerCreator;
 }
 @end
 
@@ -19,14 +19,14 @@
 
 - (id)initForPath:(NSString *)path
 supportingMethods:(NSArray *)methods
-   handledByClass:(Class)handlerClass
+        createdBy:(HandlerCreator)handlerCreator
 {
     self = [super init];
     if (self) {
         // TODO: normalize path (e.g. strip trailing /)
         _path = [path copy];
         _supportedMethods = [methods retain];
-        _handlerClass = handlerClass;
+        _handlerCreator = handlerCreator;
     }
     return self;
 }
@@ -49,9 +49,9 @@ supportingMethods:(NSArray *)methods
     return ([[_supportedMethods filteredArrayUsingPredicate:containsMethod] count] > 0);
 }
 
-- (NSObject<HTTPRequestHandler> *)newHandlerWithContext:(HTTPRequestContext *)context
+- (NSObject<HTTPRequestHandler> *)newHandler
 {
-    return [[_handlerClass alloc] initWithContext:context];
+    return _handlerCreator();
 }
 
 @end

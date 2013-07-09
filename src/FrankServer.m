@@ -18,12 +18,12 @@
 #import "AppCommand.h"
 #import "AccessibilityCheckCommand.h"
 #import "EnginesCommand.h"
-#import "VersionCommand.h"
 #import "SuccessCommand.h"
 #import "MapOperationCommand.h"
 #import "ResolutionCommand.h"
 
 #import "DeviceRoute.h"
+#import "VersionRoute.h"
 
 #if TARGET_OS_IPHONE
 #import "OrientationCommand.h"
@@ -60,14 +60,23 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
 		if( ![bundleName hasSuffix:@".bundle"] )
 			bundleName = [bundleName stringByAppendingString:@".bundle"];
         
-        [[RequestRouter singleton] registerRouteForPath:@"/device" supportingMethods:@[@"GET"] handledByClass:[DeviceRoute class]];
+        [self handleGetAt:@"/device"
+                     with:^NSObject<HTTPRequestHandler> *{
+                         return [[[DeviceRoute alloc] init] autorelease];
+                     }];
+
+        [self handleGetAt:@"/version"
+                     with:^NSObject<HTTPRequestHandler> *{
+                         return [[[VersionRoute alloc] initWithVersion:[NSString stringWithFormat:@"%s",xstr(FRANK_PRODUCT_VERSION)]]autorelease];
+                     }];
+
+        
 		
 		FrankCommandRoute *frankCommandRoute = [FrankCommandRoute singleton];
         [frankCommandRoute registerCommand:[[[ResolutionCommand alloc] init] autorelease] withName:@"resolution"];
 		[frankCommandRoute registerCommand:[[[AccessibilityCheckCommand alloc] init]autorelease] withName:@"accessibility_check"];
 		[frankCommandRoute registerCommand:[[[AppCommand alloc] init]autorelease] withName:@"app_exec"];
         [frankCommandRoute registerCommand:[[[EnginesCommand alloc] init]autorelease] withName:@"engines"];
-        [frankCommandRoute registerCommand:[[[VersionCommand alloc] initWithVersion:[NSString stringWithFormat:@"%s",xstr(FRANK_PRODUCT_VERSION)]]autorelease] withName:@"version"];
         [frankCommandRoute registerCommand:[[[ExitCommand alloc] init] autorelease] withName:@"exit"];
         [frankCommandRoute registerCommand:[[[MapOperationCommand alloc]init]autorelease] withName:@"map"];
         
@@ -118,6 +127,13 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
 {
 	[_httpServer release];
 	[super dealloc];
+}
+
+- (void) handleGetAt:(NSString*)path with:(HandlerCreator)handlerCreator{
+    
+    [[RequestRouter singleton] registerRouteForPath:path
+                                  supportingMethods:@[@"GET"]
+                                          createdBy:handlerCreator];
 }
 
 @end

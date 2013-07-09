@@ -11,7 +11,6 @@
 #import "RoutingHTTPConnection.h"
 #import "RequestRouter.h"
 #import "HttpRequestContext.h"
-#import "RoutingEntry.h"
 
 @interface RequestRouter(Private)
 
@@ -70,8 +69,8 @@ static RequestRouter *s_singleton;
 
 - (void) registerRouteForPath:(NSString *)path
             supportingMethods:(NSArray *)methods
-               handledByClass:(Class)handlerClass {
-    RoutingEntry *routingEntry = [[RoutingEntry alloc] initForPath:path supportingMethods:methods handledByClass:handlerClass];
+                    createdBy:(HandlerCreator)handlerCreator {
+    RoutingEntry *routingEntry = [[RoutingEntry alloc] initForPath:path supportingMethods:methods createdBy:handlerCreator];
     [self registerRoutingEntry:routingEntry];
     [routingEntry release];
 }
@@ -86,8 +85,8 @@ static RequestRouter *s_singleton;
             // FIXME: make a real context
             HTTPRequestContext *requestContext = [[HTTPRequestContext alloc] init];
             dispatch_sync(dispatch_get_main_queue(), ^{
-                id<HTTPRequestHandler> handler = [[routingEntry newHandlerWithContext:requestContext] retain];
-                response = [[handler handleRequest] retain];
+                id<HTTPRequestHandler> handler = [[routingEntry newHandler] retain];
+                response = [[handler handleRequest:requestContext] retain];
             });
             return [response autorelease];
         }

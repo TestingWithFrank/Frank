@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 
 #import "HTTPResponse.h"
+#import "RoutingEntry.h"
 
-@class RoutingEntry;
 @class RoutingHTTPConnection;
 
 @protocol Route
@@ -25,7 +25,7 @@
 - (void) registerRoutingEntry:(RoutingEntry *)routingEntry;
 - (void) registerRouteForPath:(NSString *)path
             supportingMethods:(NSArray *)methods
-               handledByClass:(Class)handlerClass;
+                    createdBy:(HandlerCreator)handlerClass;
 
 - (NSObject<HTTPResponse> *) handleRequestForPath:(NSString *)path
                                            method:(NSString *)method

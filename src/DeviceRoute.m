@@ -13,7 +13,7 @@
 
 @implementation DeviceRoute
 
--(NSObject<HTTPResponse> *) handleRequest{
+-(NSObject<HTTPResponse> *) handleRequest:(HTTPRequestContext *)context{
     NSString* device = nil;
     
 #if TARGET_OS_IPHONE

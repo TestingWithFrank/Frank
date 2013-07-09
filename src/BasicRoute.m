@@ -13,22 +13,7 @@
 
 @implementation BasicRoute
 
-- (id)initWithContext:(HTTPRequestContext *)context
-{
-    self = [super init];
-    if (self) {
-        _context = [context retain];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [_context release];
-    [super dealloc];
-}
-
--(NSObject<HTTPResponse> *) handleRequest {
+-(NSObject<HTTPResponse> *) handleRequest:(HTTPRequestContext *)context {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
                                  userInfo:nil];

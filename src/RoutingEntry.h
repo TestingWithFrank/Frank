@@ -14,18 +14,20 @@
 
 @protocol HTTPRequestHandler
 @required
--(NSObject<HTTPResponse> *) handleRequest;
+-(NSObject<HTTPResponse> *) handleRequest:(HTTPRequestContext *)context;
 @end
+
+typedef NSObject<HTTPRequestHandler> *(^HandlerCreator)();
 
 @interface RoutingEntry : NSObject
 
 - (id)initForPath:(NSString *)path
 supportingMethods:(NSArray *)methods
-   handledByClass:(Class)handlerClass;
+   createdBy:(HandlerCreator)handlerCreator;
 
 - (BOOL)handlesPath:(NSArray *)pathComponents;
 - (BOOL)supportsMethod:(NSString *)method;
-- (NSObject<HTTPRequestHandler> *)newHandlerWithContext:(HTTPRequestContext *)context;
+- (NSObject<HTTPRequestHandler> *)newHandler;
 
 
 @end
