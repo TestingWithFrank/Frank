@@ -57,32 +57,10 @@
 	}
 }
 
-- (NSString *)getOrientationDescriptionViaDevice{
-    switch ( [UIDevice currentDevice].orientation ) {
-		case UIDeviceOrientationLandscapeRight:
-		case UIDeviceOrientationLandscapeLeft:
-			return @"landscape";
-		case UIDeviceOrientationPortrait:
-		case UIDeviceOrientationPortraitUpsideDown:
-			return @"portrait";
-        case UIDeviceOrientationFaceUp:
-            NSLog(@"Device orientation is face up");
-            //fall thru
-        case UIDeviceOrientationFaceDown:
-            NSLog(@"Device orientation is face down");
-            //fall thru
-        case UIDeviceOrientationUnknown:
-            NSLog(@"Device orientation is unknown");
-            //fall thru
-		default:
-            return nil;
-	}
-}
-
 - (NSString *)handleGet{
    	NSDictionary *orientationDescription = [self getOrientationRepresentationViaDevice];
     if( !orientationDescription )
-        orientationDescription = [self getOrientationRepresentationViaDevice];
+        orientationDescription = [self getOrientationRepresentationViaStatusBar];
 	
 	return TO_JSON(orientationDescription);
 }
