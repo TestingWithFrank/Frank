@@ -67,8 +67,6 @@
 		30E82E3417128AB500E5BC7C /* ResolutionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E82E3117128AB500E5BC7C /* ResolutionCommand.m */; };
 		30E82E3517128AB500E5BC7C /* ResolutionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E82E3117128AB500E5BC7C /* ResolutionCommand.m */; };
 		387BFA7D17036DDA007B9F17 /* UISlider+PublicAutomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 387BFA7C17036DDA007B9F17 /* UISlider+PublicAutomation.m */; };
-		4C1DD76C12BADFE100E10B8C /* OrientationCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DD76812BADFE100E10B8C /* OrientationCommand.m */; };
-		4C1DD76D12BADFE100E10B8C /* OrientationCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C1DD76912BADFE100E10B8C /* OrientationCommand.h */; };
 		4C1DD76E12BADFE100E10B8C /* AppCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DD76A12BADFE100E10B8C /* AppCommand.m */; };
 		4C1DD76F12BADFE100E10B8C /* AppCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C1DD76B12BADFE100E10B8C /* AppCommand.h */; };
 		65DBDD7416A89CCA007D3D43 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7947C115C4418700052B74 /* GCDAsyncSocket.m */; };
@@ -141,6 +139,10 @@
 		C110E49B178BDA6000CFE509 /* VersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E498178BDA5E00CFE509 /* VersionRoute.h */; };
 		C110E49C178BDA6000CFE509 /* VersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E499178BDA5F00CFE509 /* VersionRoute.m */; };
 		C110E49D178BDA6000CFE509 /* VersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E499178BDA5F00CFE509 /* VersionRoute.m */; };
+		C110E4A0178BE43F00CFE509 /* OrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E49E178BE43C00CFE509 /* OrientationRoute.h */; };
+		C110E4A1178BE43F00CFE509 /* OrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E49E178BE43C00CFE509 /* OrientationRoute.h */; };
+		C110E4A2178BE43F00CFE509 /* OrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E49F178BE43E00CFE509 /* OrientationRoute.m */; };
+		C110E4A3178BE43F00CFE509 /* OrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E49F178BE43E00CFE509 /* OrientationRoute.m */; };
 		C177A4CC1632319A0081DF77 /* AnyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = C177A4CA1632319A0081DF77 /* AnyJSON.h */; };
 		C177A4CD1632319A0081DF77 /* AnyJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = C177A4CB1632319A0081DF77 /* AnyJSON.m */; };
 		C18A5EF0160D4AB400DC25F6 /* ImageCaptureRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C18A5EEE160D4AB400DC25F6 /* ImageCaptureRoute.h */; };
@@ -323,8 +325,6 @@
 		30E82E3017128AB500E5BC7C /* ResolutionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResolutionCommand.h; sourceTree = "<group>"; };
 		30E82E3117128AB500E5BC7C /* ResolutionCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResolutionCommand.m; sourceTree = "<group>"; };
 		387BFA7C17036DDA007B9F17 /* UISlider+PublicAutomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+PublicAutomation.m"; sourceTree = "<group>"; };
-		4C1DD76812BADFE100E10B8C /* OrientationCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationCommand.m; sourceTree = "<group>"; };
-		4C1DD76912BADFE100E10B8C /* OrientationCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationCommand.h; sourceTree = "<group>"; };
 		4C1DD76A12BADFE100E10B8C /* AppCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCommand.m; sourceTree = "<group>"; };
 		4C1DD76B12BADFE100E10B8C /* AppCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCommand.h; sourceTree = "<group>"; };
 		65DBDD9216A89CCA007D3D43 /* libCocoaAsyncSocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocoaAsyncSocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,6 +399,8 @@
 		C110E493178BD21F00CFE509 /* BasicRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicRoute.m; sourceTree = "<group>"; };
 		C110E498178BDA5E00CFE509 /* VersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionRoute.h; sourceTree = "<group>"; };
 		C110E499178BDA5F00CFE509 /* VersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionRoute.m; sourceTree = "<group>"; };
+		C110E49E178BE43C00CFE509 /* OrientationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationRoute.h; sourceTree = "<group>"; };
+		C110E49F178BE43E00CFE509 /* OrientationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrientationRoute.m; sourceTree = "<group>"; };
 		C177A4CA1632319A0081DF77 /* AnyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyJSON.h; path = AnyJSON/AnyJSON.h; sourceTree = "<group>"; };
 		C177A4CB1632319A0081DF77 /* AnyJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnyJSON.m; path = AnyJSON/AnyJSON.m; sourceTree = "<group>"; };
 		C177A4CE163234B60081DF77 /* JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -705,8 +707,6 @@
 				9B3E52AE163FB98300EB24C2 /* LocationCommand.m */,
 				D6D05CA711C883AA0081C5A5 /* MapOperationCommand.h */,
 				D6D05CA811C883AA0081C5A5 /* MapOperationCommand.m */,
-				4C1DD76912BADFE100E10B8C /* OrientationCommand.h */,
-				4C1DD76812BADFE100E10B8C /* OrientationCommand.m */,
 				30AC65A5165C3A4D00DEB0AB /* OSXKeyboardCommand.h */,
 				30AC65A6165C3A4D00DEB0AB /* OSXKeyboardCommand.m */,
 				30C544AF167E4D9E0034F49C /* SuccessCommand.h */,
@@ -742,6 +742,8 @@
 				C110E471178A11B800CFE509 /* DeviceRoute.m */,
 				C110E498178BDA5E00CFE509 /* VersionRoute.h */,
 				C110E499178BDA5F00CFE509 /* VersionRoute.m */,
+				C110E49E178BE43C00CFE509 /* OrientationRoute.h */,
+				C110E49F178BE43E00CFE509 /* OrientationRoute.m */,
 			);
 			name = Routing;
 			sourceTree = "<group>";
@@ -850,6 +852,7 @@
 				C110E473178A11B900CFE509 /* DeviceRoute.h in Headers */,
 				C110E495178BD22100CFE509 /* BasicRoute.h in Headers */,
 				C110E49B178BDA6000CFE509 /* VersionRoute.h in Headers */,
+				C110E4A1178BE43F00CFE509 /* OrientationRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,7 +869,6 @@
 				D6D05CBF11C883AA0081C5A5 /* RoutingHTTPConnection.h in Headers */,
 				D6D05CC111C883AA0081C5A5 /* StaticResourcesRoute.h in Headers */,
 				D6D79B5D11D7FB8B003E0E60 /* Operation.h in Headers */,
-				4C1DD76D12BADFE100E10B8C /* OrientationCommand.h in Headers */,
 				4C1DD76F12BADFE100E10B8C /* AppCommand.h in Headers */,
 				D67F2AAD13F5E7FA00A0BFF1 /* AccessibilityCheckCommand.h in Headers */,
 				D67F2ABF13F5F55A00A0BFF1 /* FrankLoader.h in Headers */,
@@ -896,6 +898,7 @@
 				C110E472178A11B900CFE509 /* DeviceRoute.h in Headers */,
 				C110E494178BD22100CFE509 /* BasicRoute.h in Headers */,
 				C110E49A178BDA6000CFE509 /* VersionRoute.h in Headers */,
+				C110E4A0178BE43F00CFE509 /* OrientationRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,6 +1146,7 @@
 				C110E475178A11B900CFE509 /* DeviceRoute.m in Sources */,
 				C110E497178BD22100CFE509 /* BasicRoute.m in Sources */,
 				C110E49D178BDA6000CFE509 /* VersionRoute.m in Sources */,
+				C110E4A3178BE43F00CFE509 /* OrientationRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1247,7 +1251,6 @@
 				D6D05CC011C883AA0081C5A5 /* RoutingHTTPConnection.m in Sources */,
 				D6D05CC211C883AA0081C5A5 /* StaticResourcesRoute.m in Sources */,
 				D6D79B5E11D7FB8B003E0E60 /* Operation.m in Sources */,
-				4C1DD76C12BADFE100E10B8C /* OrientationCommand.m in Sources */,
 				4C1DD76E12BADFE100E10B8C /* AppCommand.m in Sources */,
 				D67F2AAE13F5E7FA00A0BFF1 /* AccessibilityCheckCommand.m in Sources */,
 				D67F2AC013F5F55A00A0BFF1 /* FrankLoader.m in Sources */,
@@ -1276,6 +1279,7 @@
 				C110E474178A11B900CFE509 /* DeviceRoute.m in Sources */,
 				C110E496178BD22100CFE509 /* BasicRoute.m in Sources */,
 				C110E49C178BDA6000CFE509 /* VersionRoute.m in Sources */,
+				C110E4A2178BE43F00CFE509 /* OrientationRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

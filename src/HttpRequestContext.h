@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class HTTPMessage;
+
 @interface HTTPRequestContext : NSObject
 
+- (id)initWithRequest:(HTTPMessage *)request;
+
+- (BOOL) isMethod:(NSString *)method;
+- (NSString *)bodyAsString;
 @end

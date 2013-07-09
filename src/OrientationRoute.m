@@ -1,22 +1,21 @@
 //
-//  OrientationCommand.m
-//  Chase.Mobi
+//  OrientationRoute.m
+//  Frank
 //
-//  Created by Pete Hodgson on 9/21/10.
-//  Copyright 2010 ThoughtWorks. See NOTICE file for details.
+//  Created by Pete Hodgson on 7/8/13.
+//
 //
 
-#import "OrientationCommand.h"
+#import "OrientationRoute.h"
 
 #import <PublicAutomation/UIAutomationBridge.h>
-#import "FranklyProtocolHelper.h"
-#import "JSON.h"
 
+#import "HttpRequestContext.h"
 
-@implementation OrientationCommand
+@implementation OrientationRoute
 
 - (NSDictionary *)representOrientation:(NSString *)orientation withDetailedOrientation:(NSString *)detailedOrientation{
-    return [NSDictionary dictionaryWithObjectsAndKeys:orientation,@"orientation", detailedOrientation,@"detailed_orientation",nil];
+    return @{@"orientation":orientation, @"detailed_description":detailedOrientation};
 }
 
 - (NSDictionary *)getOrientationRepresentationViaStatusBar{
@@ -57,15 +56,15 @@
 	}
 }
 
-- (NSString *)handleGet{
+- (HTTPDataResponse *)handleGet{
    	NSDictionary *orientationDescription = [self getOrientationRepresentationViaDevice];
     if( !orientationDescription )
         orientationDescription = [self getOrientationRepresentationViaStatusBar];
 	
-	return TO_JSON(orientationDescription);
+    return [self responseWithJsonBody:orientationDescription];
 }
 
-- (NSString *)handlePost:(NSString *)requestBody{
+- (HTTPDataResponse *)handlePost:(NSString *)requestBody{
     requestBody = [requestBody lowercaseString];
     
     UIDeviceOrientation requestedOrientation = UIDeviceOrientationUnknown;
@@ -80,20 +79,26 @@
     }
     
     if( requestedOrientation == UIDeviceOrientationUnknown){
-        return [FranklyProtocolHelper generateErrorResponseWithReason:@"unrecognized orientation"
-                                                           andDetails:[NSString stringWithFormat:@"orientation '%@' is invalid. Use 'landscape_right','landscape_left','portrait', or 'portrait_upside_down'", requestBody]];
+        return [self errorResponseWithReason:@"unrecognized orientation"
+                                  andDetails:[NSString stringWithFormat:@"orientation '%@' is invalid. Use 'landscape_right','landscape_left','portrait', or 'portrait_upside_down'", requestBody]];
     }
-
+    
     [UIAutomationBridge setOrientation:requestedOrientation];
     
-    return [FranklyProtocolHelper generateSuccessResponseWithoutResults];
+    return [self successResponseWithoutResults];
 }
 
-- (NSString *)handleCommandWithRequestBody:(NSString *)requestBody {
-    if( !requestBody || [requestBody isEqualToString:@""] )
+-(NSObject<HTTPResponse> *) handleRequest:(HTTPRequestContext *)context{
+    if( [context isMethod:@"GET"] ){
         return [self handleGet];
-    else
-        return [self handlePost:requestBody];
+        
+    }else if( [context isMethod:@"POST"] ){
+        return [self handlePost:context.bodyAsString];
+    }else{
+        return nil;
+    }
 }
+
+
 
 @end

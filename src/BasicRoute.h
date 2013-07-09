@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "RoutingEntry.h"
 
-@class HTTPDataResponse;
+#import "HTTPDataResponse.h"
+
 
 @interface BasicRoute : NSObject<HTTPRequestHandler>
 - (HTTPDataResponse *)responseWithJsonBody:(id)json;
 - (HTTPDataResponse *)responseWithStringBody:(NSString *)body;
+- (HTTPDataResponse *)successResponseWithoutResults;
+- (HTTPDataResponse *)errorResponseWithReason:(NSString *)reason andDetails:(NSString *)details;
+
 @end

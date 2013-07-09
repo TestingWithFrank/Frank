@@ -9,7 +9,7 @@
 #import "BasicRoute.h"
 
 #import "AnyJSON.h"
-#import "HTTPDataResponse.h"
+#import "FranklyProtocolHelper.h"
 
 @implementation BasicRoute
 
@@ -29,5 +29,11 @@
     return [[[HTTPDataResponse alloc] initWithData:data] autorelease];
 }
 
+-(HTTPDataResponse *)successResponseWithoutResults{
+    return [self responseWithJsonBody:[FranklyProtocolHelper successResponseWithoutResults]];
+}
 
+-(HTTPDataResponse *)errorResponseWithReason:(NSString *)reason andDetails:(NSString *)details{
+    return [self responseWithJsonBody:[FranklyProtocolHelper errorResponseWithReason:reason andDetails:details]];
+}
 @end

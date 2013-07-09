@@ -18,4 +18,6 @@
 
 - (NSString *)postDataAsString;
 
+- (HTTPMessage *)request;
+
 @end

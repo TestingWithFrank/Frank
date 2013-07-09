@@ -29,7 +29,6 @@
 }
 
 -(NSObject<HTTPResponse> *) handleRequest:(HTTPRequestContext *)context{
-
     return [self responseWithJsonBody:@{@"version":_version}];
 }
 

@@ -39,6 +39,10 @@
 		return [[[NSString alloc] initWithData:(_postData) encoding:NSUTF8StringEncoding] autorelease];
 }
 
+- (HTTPMessage *)request {
+    return request;
+}
+
 #pragma mark HTTPConnection overrides
 
 
@@ -62,6 +66,9 @@
  **/
 - (void)processBodyData:(NSData *)postDataChunk
 {
+    [request appendData:postDataChunk];
+    //_postData is deprecated but still used.
+    //TODO: just reference request.body instead.
     [_postData appendData:postDataChunk];
 }
 

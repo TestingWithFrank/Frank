@@ -24,9 +24,9 @@
 
 #import "DeviceRoute.h"
 #import "VersionRoute.h"
+#import "OrientationRoute.h"
 
 #if TARGET_OS_IPHONE
-#import "OrientationCommand.h"
 #import "LocationCommand.h"
 #import "IOSKeyboardCommand.h"
 #else
@@ -60,19 +60,28 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
 		if( ![bundleName hasSuffix:@".bundle"] )
 			bundleName = [bundleName stringByAppendingString:@".bundle"];
         
+        FrankCommandRoute *frankCommandRoute = [FrankCommandRoute singleton];
+        
         [self handleGetAt:@"/device"
-                     with:^NSObject<HTTPRequestHandler> *{
+                     with:^{
                          return [[[DeviceRoute alloc] init] autorelease];
                      }];
 
         [self handleGetAt:@"/version"
-                     with:^NSObject<HTTPRequestHandler> *{
+                     with:^{
                          return [[[VersionRoute alloc] initWithVersion:[NSString stringWithFormat:@"%s",xstr(FRANK_PRODUCT_VERSION)]]autorelease];
                      }];
-
+        
+#if TARGET_OS_IPHONE
+        [self handleGetOrPostAt:@"/orientation"
+                           with:^{
+                               return [[[OrientationRoute alloc] init] autorelease];
+                           }];
+#else
+        [frankCommandRoute registerCommand:[[[SuccessCommand alloc]init]autorelease] withName:@"orientation"];
+#endif
         
 		
-		FrankCommandRoute *frankCommandRoute = [FrankCommandRoute singleton];
         [frankCommandRoute registerCommand:[[[ResolutionCommand alloc] init] autorelease] withName:@"resolution"];
 		[frankCommandRoute registerCommand:[[[AccessibilityCheckCommand alloc] init]autorelease] withName:@"accessibility_check"];
 		[frankCommandRoute registerCommand:[[[AppCommand alloc] init]autorelease] withName:@"app_exec"];
@@ -81,7 +90,6 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
         [frankCommandRoute registerCommand:[[[MapOperationCommand alloc]init]autorelease] withName:@"map"];
         
 #if TARGET_OS_IPHONE
-        [frankCommandRoute registerCommand:[[[OrientationCommand alloc]init]autorelease] withName:@"orientation"];
         [frankCommandRoute registerCommand:[[[LocationCommand alloc]init]autorelease] withName:@"location"];
         [frankCommandRoute registerCommand:[[[IOSKeyboardCommand alloc] init]autorelease] withName:@"type_into_keyboard"];
 #else
@@ -135,5 +143,13 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
                                   supportingMethods:@[@"GET"]
                                           createdBy:handlerCreator];
 }
+
+- (void) handleGetOrPostAt:(NSString*)path with:(HandlerCreator)handlerCreator{
+    
+    [[RequestRouter singleton] registerRouteForPath:path
+                                  supportingMethods:@[@"GET",@"POST"]
+                                          createdBy:handlerCreator];
+}
+
 
 @end

@@ -10,24 +10,21 @@
 #import "JSON.h"
 
 
-@implementation FranklyProtocolHelper {
+@implementation FranklyProtocolHelper
 
++ (NSDictionary *)errorResponseWithReason:(NSString *)reason andDetails:(NSString *)details{
+    return @{@"outcome":@"ERROR",@"reason":reason,@"details":details};
 }
-
 + (NSString *)generateErrorResponseWithReason:(NSString *)reason andDetails:(NSString *)details{
-	NSDictionary *response = [NSDictionary dictionaryWithObjectsAndKeys:
-							  @"ERROR", @"outcome",
-							  reason, @"reason",
-							  details, @"details",
-							  nil];
-	return TO_JSON(response);
+	return TO_JSON([self errorResponseWithReason:reason andDetails:details]);
 }
 
+
++ (NSDictionary *)successResponseWithoutResults{
+    return @{@"outcome":@"SUCCESS"};
+}
 + (NSString *)generateSuccessResponseWithoutResults{
-    NSDictionary *response = [NSDictionary dictionaryWithObjectsAndKeys:
-    							  @"SUCCESS", @"outcome",
-    							  nil];
-	return TO_JSON(response);
+	return TO_JSON([self successResponseWithoutResults]);
 }
 
 + (NSString *)generateSuccessResponseWithResults:(NSArray *)results{
