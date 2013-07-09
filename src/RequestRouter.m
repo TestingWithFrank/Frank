@@ -9,6 +9,9 @@
 #import "RequestRouter.h"
 
 #import "RoutingHTTPConnection.h"
+#import "RequestRouter.h"
+#import "HttpRequestContext.h"
+#import "RoutingEntry.h"
 
 @interface RequestRouter(Private)
 
@@ -43,6 +46,7 @@ static RequestRouter *s_singleton;
 	self = [super init];
 	if (self != nil) {
 		_routes = [[NSMutableArray alloc] init];
+        _routingTable = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -50,6 +54,7 @@ static RequestRouter *s_singleton;
 - (void) dealloc
 {
 	[_routes release];
+    [_routingTable release];
 	[super dealloc];
 }
 
@@ -59,11 +64,45 @@ static RequestRouter *s_singleton;
 	[_routes addObject:route];
 }
 
+- (void) registerRoutingEntry:(RoutingEntry *)routingEntry {
+    [_routingTable addObject:routingEntry];
+}
+
+- (void) registerRouteForPath:(NSString *)path
+            supportingMethods:(NSArray *)methods
+               handledByClass:(Class)handlerClass {
+    RoutingEntry *routingEntry = [[RoutingEntry alloc] initForPath:path supportingMethods:methods handledByClass:handlerClass];
+    [self registerRoutingEntry:routingEntry];
+    [routingEntry release];
+}
+
+- (NSObject<HTTPResponse> *) handleRequestForPath:(NSString *)path
+                                           method:(NSString *)method
+                                       connection:(RoutingHTTPConnection *)connection {
+	NSArray *pathComponents = [self pathComponentsWithPath:path];
+	__block NSObject<HTTPResponse> *response = nil;
+    for (RoutingEntry *routingEntry in _routingTable) {
+        if( [routingEntry handlesPath:pathComponents] && [routingEntry supportsMethod:method] ){
+            // FIXME: make a real context
+            HTTPRequestContext *requestContext = [[HTTPRequestContext alloc] init];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                id<HTTPRequestHandler> handler = [[routingEntry newHandlerWithContext:requestContext] retain];
+                response = [[handler handleRequest] retain];
+            });
+            return [response autorelease];
+        }
+	}
+    
+    // fall back to older technique
+    return [self handleRequestForPath:path withConnection:connection];
+}
+
 - (NSObject<HTTPResponse> *) handleRequestForPath:(NSString *)path withConnection:(RoutingHTTPConnection *)connection {
 	
-	NSArray *pathComponents = [self pathComponentsWithPath:path];	
+	NSArray *pathComponents = [self pathComponentsWithPath:path];
 	__block NSObject<HTTPResponse> *response = nil;
-	for (id<Route> route in _routes) {
+	
+    for (id<Route> route in _routes) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             response = [[route handleRequestForPath:pathComponents withConnection:connection] retain];
         });

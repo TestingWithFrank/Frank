@@ -14,7 +14,6 @@
 #import "DumpCommandRoute.h"
 #import "ImageCaptureRoute.h"
 #import "FrankCommandRoute.h"
-#import "DeviceCommand.h"
 #import "ExitCommand.h"
 #import "AppCommand.h"
 #import "AccessibilityCheckCommand.h"
@@ -23,6 +22,8 @@
 #import "SuccessCommand.h"
 #import "MapOperationCommand.h"
 #import "ResolutionCommand.h"
+
+#import "DeviceRoute.h"
 
 #if TARGET_OS_IPHONE
 #import "OrientationCommand.h"
@@ -58,10 +59,11 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
 	if (self != nil) {
 		if( ![bundleName hasSuffix:@".bundle"] )
 			bundleName = [bundleName stringByAppendingString:@".bundle"];
+        
+        [[RequestRouter singleton] registerRouteForPath:@"/device" supportingMethods:@[@"GET"] handledByClass:[DeviceRoute class]];
 		
 		FrankCommandRoute *frankCommandRoute = [FrankCommandRoute singleton];
         [frankCommandRoute registerCommand:[[[ResolutionCommand alloc] init] autorelease] withName:@"resolution"];
-        [frankCommandRoute registerCommand:[[[DeviceCommand alloc] init] autorelease] withName:@"device"];
 		[frankCommandRoute registerCommand:[[[AccessibilityCheckCommand alloc] init]autorelease] withName:@"accessibility_check"];
 		[frankCommandRoute registerCommand:[[[AppCommand alloc] init]autorelease] withName:@"app_exec"];
         [frankCommandRoute registerCommand:[[[EnginesCommand alloc] init]autorelease] withName:@"engines"];
@@ -80,6 +82,7 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
 #endif
         
 		[[RequestRouter singleton] registerRoute:frankCommandRoute];
+        
 		
 		StaticResourcesRoute *staticRoute = [[[StaticResourcesRoute alloc] initWithStaticResourceSubDir:bundleName] autorelease];
 		[[RequestRouter singleton] registerRoute:staticRoute];

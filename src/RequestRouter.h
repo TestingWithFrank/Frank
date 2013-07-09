@@ -2,6 +2,7 @@
 
 #import "HTTPResponse.h"
 
+@class RoutingEntry;
 @class RoutingHTTPConnection;
 
 @protocol Route
@@ -14,13 +15,25 @@
 
 
 @interface RequestRouter : NSObject {
-	NSMutableArray *_routes;
+	NSMutableArray *_routes; // deprecated
+    NSMutableArray *_routingTable; // The new hotness. RoutingEntry instances
 }
 
 + (RequestRouter *)singleton;
 
 - (void) registerRoute: (id<Route>) route;
-- (NSObject<HTTPResponse> *) handleRequestForPath:(NSString *)path withConnection:(RoutingHTTPConnection *)connection;
+- (void) registerRoutingEntry:(RoutingEntry *)routingEntry;
+- (void) registerRouteForPath:(NSString *)path
+            supportingMethods:(NSArray *)methods
+               handledByClass:(Class)handlerClass;
+
+- (NSObject<HTTPResponse> *) handleRequestForPath:(NSString *)path
+                                           method:(NSString *)method
+                                       connection:(RoutingHTTPConnection *)connection;
+
+- (NSObject<HTTPResponse> *) handleRequestForPath:(NSString *)path
+                                   withConnection:(RoutingHTTPConnection *)connection;
+
 - (BOOL) canHandlePostForPath:(NSString *)path;
 
 @end

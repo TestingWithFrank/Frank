@@ -21,10 +21,6 @@
 		302B80411646DE02000F9861 /* NSImage+Frank.h in Headers */ = {isa = PBXBuildFile; fileRef = 302B803F1646DE02000F9861 /* NSImage+Frank.h */; };
 		302B80421646DE02000F9861 /* NSImage+Frank.m in Sources */ = {isa = PBXBuildFile; fileRef = 302B80401646DE02000F9861 /* NSImage+Frank.m */; };
 		303A751316702D3D00B93673 /* NSObject+FrankAutomation.m in Sources */ = {isa = PBXBuildFile; fileRef = 303A751116702D3D00B93673 /* NSObject+FrankAutomation.m */; };
-		303CFCE416C80B830004BD05 /* DeviceCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 303CFCE216C80B830004BD05 /* DeviceCommand.h */; };
-		303CFCE516C80B830004BD05 /* DeviceCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 303CFCE216C80B830004BD05 /* DeviceCommand.h */; };
-		303CFCE616C80B830004BD05 /* DeviceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCE316C80B830004BD05 /* DeviceCommand.m */; };
-		303CFCE716C80B830004BD05 /* DeviceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCE316C80B830004BD05 /* DeviceCommand.m */; };
 		30412D30165333E300719CD2 /* NSView+FrankImageCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 30412D2E165333E300719CD2 /* NSView+FrankImageCapture.h */; };
 		30412D31165333E300719CD2 /* NSView+FrankImageCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 30412D2F165333E300719CD2 /* NSView+FrankImageCapture.m */; };
 		304374F6167D2BC8006D5D71 /* AnyJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = C177A4CB1632319A0081DF77 /* AnyJSON.m */; };
@@ -125,6 +121,22 @@
 		ABA9E4B715C81E4100112290 /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA9E4B015C81E4100112290 /* HTTPDynamicFileResponse.m */; };
 		ABA9E4B815C81E4100112290 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA9E4B215C81E4100112290 /* HTTPFileResponse.m */; };
 		ABA9E4B915C81E4100112290 /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA9E4B415C81E4100112290 /* HTTPRedirectResponse.m */; };
+		C110E465178A043200CFE509 /* RoutingEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E463178A043100CFE509 /* RoutingEntry.h */; };
+		C110E466178A043200CFE509 /* RoutingEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E463178A043100CFE509 /* RoutingEntry.h */; };
+		C110E467178A043200CFE509 /* RoutingEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E464178A043100CFE509 /* RoutingEntry.m */; };
+		C110E468178A043200CFE509 /* RoutingEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E464178A043100CFE509 /* RoutingEntry.m */; };
+		C110E46C178A0C5D00CFE509 /* HttpRequestContext.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E46A178A0C5C00CFE509 /* HttpRequestContext.h */; };
+		C110E46D178A0C5D00CFE509 /* HttpRequestContext.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E46A178A0C5C00CFE509 /* HttpRequestContext.h */; };
+		C110E46E178A0C5D00CFE509 /* HttpRequestContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E46B178A0C5D00CFE509 /* HttpRequestContext.m */; };
+		C110E46F178A0C5D00CFE509 /* HttpRequestContext.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E46B178A0C5D00CFE509 /* HttpRequestContext.m */; };
+		C110E472178A11B900CFE509 /* DeviceRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E470178A11B700CFE509 /* DeviceRoute.h */; };
+		C110E473178A11B900CFE509 /* DeviceRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E470178A11B700CFE509 /* DeviceRoute.h */; };
+		C110E474178A11B900CFE509 /* DeviceRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E471178A11B800CFE509 /* DeviceRoute.m */; };
+		C110E475178A11B900CFE509 /* DeviceRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E471178A11B800CFE509 /* DeviceRoute.m */; };
+		C110E494178BD22100CFE509 /* BasicRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E492178BD21E00CFE509 /* BasicRoute.h */; };
+		C110E495178BD22100CFE509 /* BasicRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E492178BD21E00CFE509 /* BasicRoute.h */; };
+		C110E496178BD22100CFE509 /* BasicRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E493178BD21F00CFE509 /* BasicRoute.m */; };
+		C110E497178BD22100CFE509 /* BasicRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E493178BD21F00CFE509 /* BasicRoute.m */; };
 		C177A4CC1632319A0081DF77 /* AnyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = C177A4CA1632319A0081DF77 /* AnyJSON.h */; };
 		C177A4CD1632319A0081DF77 /* AnyJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = C177A4CB1632319A0081DF77 /* AnyJSON.m */; };
 		C189EF1E16BB5A8100F8236D /* VersionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = C189EF1C16BB5A8000F8236D /* VersionCommand.h */; };
@@ -292,8 +304,6 @@
 		302B803F1646DE02000F9861 /* NSImage+Frank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Frank.h"; sourceTree = "<group>"; };
 		302B80401646DE02000F9861 /* NSImage+Frank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Frank.m"; sourceTree = "<group>"; };
 		303A751116702D3D00B93673 /* NSObject+FrankAutomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FrankAutomation.m"; sourceTree = "<group>"; };
-		303CFCE216C80B830004BD05 /* DeviceCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommand.h; sourceTree = "<group>"; };
-		303CFCE316C80B830004BD05 /* DeviceCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommand.m; sourceTree = "<group>"; };
 		30412D2E165333E300719CD2 /* NSView+FrankImageCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+FrankImageCapture.h"; sourceTree = "<group>"; };
 		30412D2F165333E300719CD2 /* NSView+FrankImageCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+FrankImageCapture.m"; sourceTree = "<group>"; };
 		304A0C801699105600150BE8 /* NSApplication+FrankAutomation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+FrankAutomation.m"; sourceTree = "<group>"; };
@@ -379,6 +389,14 @@
 		ABA9E4CA15C81E8700112290 /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
 		ABA9E4CB15C81E8700112290 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		ABA9E4CC15C81E8700112290 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		C110E463178A043100CFE509 /* RoutingEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutingEntry.h; sourceTree = "<group>"; };
+		C110E464178A043100CFE509 /* RoutingEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutingEntry.m; sourceTree = "<group>"; };
+		C110E46A178A0C5C00CFE509 /* HttpRequestContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestContext.h; sourceTree = "<group>"; };
+		C110E46B178A0C5D00CFE509 /* HttpRequestContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestContext.m; sourceTree = "<group>"; };
+		C110E470178A11B700CFE509 /* DeviceRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceRoute.h; sourceTree = "<group>"; };
+		C110E471178A11B800CFE509 /* DeviceRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceRoute.m; sourceTree = "<group>"; };
+		C110E492178BD21E00CFE509 /* BasicRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicRoute.h; sourceTree = "<group>"; };
+		C110E493178BD21F00CFE509 /* BasicRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicRoute.m; sourceTree = "<group>"; };
 		C177A4CA1632319A0081DF77 /* AnyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyJSON.h; path = AnyJSON/AnyJSON.h; sourceTree = "<group>"; };
 		C177A4CB1632319A0081DF77 /* AnyJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnyJSON.m; path = AnyJSON/AnyJSON.m; sourceTree = "<group>"; };
 		C177A4CE163234B60081DF77 /* JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -677,8 +695,6 @@
 				D67F2AAC13F5E7FA00A0BFF1 /* AccessibilityCheckCommand.m */,
 				4C1DD76B12BADFE100E10B8C /* AppCommand.h */,
 				4C1DD76A12BADFE100E10B8C /* AppCommand.m */,
-				303CFCE216C80B830004BD05 /* DeviceCommand.h */,
-				303CFCE316C80B830004BD05 /* DeviceCommand.m */,
 				D6FA01B714283C4F00576AF0 /* EnginesCommand.h */,
 				D6FA01B714283C4F00576AEE /* EnginesCommand.m */,
 				A91F3AA415F6E456003F434F /* ExitCommand.h */,
@@ -698,7 +714,6 @@
 				C189EF1C16BB5A8000F8236D /* VersionCommand.h */,
 				C189EF1D16BB5A8000F8236D /* VersionCommand.m */,
 				30E82E3017128AB500E5BC7C /* ResolutionCommand.h */,
-				30E82E3117128AB500E5BC7C /* ResolutionCommand.m */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -706,6 +721,7 @@
 		C9605E701606C4BD00170F88 /* Routing */ = {
 			isa = PBXGroup;
 			children = (
+				30E82E3117128AB500E5BC7C /* ResolutionCommand.m */,
 				0626BFAC174300240020B33B /* DumpCommandRoute.h */,
 				0626BFAD174300240020B33B /* DumpCommandRoute.m */,
 				D6D05CA311C883AA0081C5A5 /* FrankCommandRoute.h */,
@@ -718,6 +734,14 @@
 				D6D05CAE11C883AA0081C5A5 /* RoutingHTTPConnection.m */,
 				D6D05CAF11C883AA0081C5A5 /* StaticResourcesRoute.h */,
 				D6D05CB011C883AA0081C5A5 /* StaticResourcesRoute.m */,
+				C110E463178A043100CFE509 /* RoutingEntry.h */,
+				C110E464178A043100CFE509 /* RoutingEntry.m */,
+				C110E46A178A0C5C00CFE509 /* HttpRequestContext.h */,
+				C110E46B178A0C5D00CFE509 /* HttpRequestContext.m */,
+				C110E492178BD21E00CFE509 /* BasicRoute.h */,
+				C110E493178BD21F00CFE509 /* BasicRoute.m */,
+				C110E470178A11B700CFE509 /* DeviceRoute.h */,
+				C110E471178A11B800CFE509 /* DeviceRoute.m */,
 			);
 			name = Routing;
 			sourceTree = "<group>";
@@ -821,8 +845,11 @@
 				30AC65A7165C3A4D00DEB0AB /* OSXKeyboardCommand.h in Headers */,
 				30C544B2167E4D9E0034F49C /* SuccessCommand.h in Headers */,
 				C189EF1F16BB5A8100F8236D /* VersionCommand.h in Headers */,
-				303CFCE516C80B830004BD05 /* DeviceCommand.h in Headers */,
 				30E82E3317128AB500E5BC7C /* ResolutionCommand.h in Headers */,
+				C110E466178A043200CFE509 /* RoutingEntry.h in Headers */,
+				C110E46D178A0C5D00CFE509 /* HttpRequestContext.h in Headers */,
+				C110E473178A11B900CFE509 /* DeviceRoute.h in Headers */,
+				C110E495178BD22100CFE509 /* BasicRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,9 +890,12 @@
 				9B3E52AF163FB98300EB24C2 /* LocationCommand.h in Headers */,
 				30C544B1167E4D9E0034F49C /* SuccessCommand.h in Headers */,
 				C189EF1E16BB5A8100F8236D /* VersionCommand.h in Headers */,
-				303CFCE416C80B830004BD05 /* DeviceCommand.h in Headers */,
 				30E82E3217128AB500E5BC7C /* ResolutionCommand.h in Headers */,
 				0626BFAE174300240020B33B /* DumpCommandRoute.h in Headers */,
+				C110E465178A043200CFE509 /* RoutingEntry.h in Headers */,
+				C110E46C178A0C5D00CFE509 /* HttpRequestContext.h in Headers */,
+				C110E472178A11B900CFE509 /* DeviceRoute.h in Headers */,
+				C110E494178BD22100CFE509 /* BasicRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,8 +1138,11 @@
 				30C544B4167E4D9E0034F49C /* SuccessCommand.m in Sources */,
 				304A0C821699105600150BE8 /* NSApplication+FrankAutomation.m in Sources */,
 				C189EF2116BB5A8100F8236D /* VersionCommand.m in Sources */,
-				303CFCE716C80B830004BD05 /* DeviceCommand.m in Sources */,
 				30E82E3517128AB500E5BC7C /* ResolutionCommand.m in Sources */,
+				C110E468178A043200CFE509 /* RoutingEntry.m in Sources */,
+				C110E46F178A0C5D00CFE509 /* HttpRequestContext.m in Sources */,
+				C110E475178A11B900CFE509 /* DeviceRoute.m in Sources */,
+				C110E497178BD22100CFE509 /* BasicRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1235,11 +1268,14 @@
 				9B3E52B0163FB98300EB24C2 /* LocationCommand.m in Sources */,
 				30C544B3167E4D9E0034F49C /* SuccessCommand.m in Sources */,
 				C189EF2016BB5A8100F8236D /* VersionCommand.m in Sources */,
-				303CFCE616C80B830004BD05 /* DeviceCommand.m in Sources */,
 				30E82E3417128AB500E5BC7C /* ResolutionCommand.m in Sources */,
 				387BFA7D17036DDA007B9F17 /* UISlider+PublicAutomation.m in Sources */,
 				0626BFAF174300240020B33B /* DumpCommandRoute.m in Sources */,
 				3078E33C175417AE0016889C /* NSObject+FrankAutomation.m in Sources */,
+				C110E467178A043200CFE509 /* RoutingEntry.m in Sources */,
+				C110E46E178A0C5D00CFE509 /* HttpRequestContext.m in Sources */,
+				C110E474178A11B900CFE509 /* DeviceRoute.m in Sources */,
+				C110E496178BD22100CFE509 /* BasicRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

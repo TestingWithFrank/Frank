@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RoutingEntry.h"
 
-@interface BasicRoute : NSObject
+@class HTTPDataResponse;
 
+@interface BasicRoute : NSObject<HTTPRequestHandler>{
+    HTTPRequestContext *_context;
+}
+
+- (id)initWithContext:(HTTPRequestContext *)context;
+
+- (HTTPDataResponse *)responseWithJsonBody:(id)json;
+- (HTTPDataResponse *)responseWithStringBody:(NSString *)body;
 @end

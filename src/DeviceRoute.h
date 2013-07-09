@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BasicRoute.h"
 
-@interface DeviceRoute : NSObject
+@interface DeviceRoute : BasicRoute
 
 @end

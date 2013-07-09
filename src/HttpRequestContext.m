@@ -6,8 +6,8 @@
 //
 //
 
-#import "HttpRequestContext.h"
+#import "HTTPRequestContext.h"
 
-@implementation HttpRequestContext
+@implementation HTTPRequestContext
 
 @end

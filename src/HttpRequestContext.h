@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HttpRequestContext : NSObject
+@interface HTTPRequestContext : NSObject
 
 @end

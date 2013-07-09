@@ -79,8 +79,8 @@
  **/
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path
 {
-	NSObject<HTTPResponse> *response = [self.router handleRequestForPath:path withConnection:self];
-	
+    NSObject<HTTPResponse> *response = [self.router handleRequestForPath:path method:method connection:self];
+    
 	requestContentLength = 0;
 	if( nil != _postData )
 	{
