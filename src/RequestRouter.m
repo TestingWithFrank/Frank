@@ -9,7 +9,7 @@
 #import "RequestRouter.h"
 
 #import "RoutingHTTPConnection.h"
-#import "RequestRouter.h"
+#import "FixedRoutingEntry.h"
 #import "HttpRequestContext.h"
 
 @interface RequestRouter(Private)
@@ -63,14 +63,14 @@ static RequestRouter *s_singleton;
 	[_routes addObject:route];
 }
 
-- (void) registerRoutingEntry:(RoutingEntry *)routingEntry {
+- (void) registerRoutingEntry:(id<RoutingEntry>)routingEntry {
     [_routingTable addObject:routingEntry];
 }
 
 - (void) registerRouteForPath:(NSString *)path
             supportingMethods:(NSArray *)methods
                     createdBy:(HandlerCreator)handlerCreator {
-    RoutingEntry *routingEntry = [[RoutingEntry alloc] initForPath:path supportingMethods:methods createdBy:handlerCreator];
+    FixedRoutingEntry *routingEntry = [[FixedRoutingEntry alloc] initForPath:path supportingMethods:methods createdBy:handlerCreator];
     [self registerRoutingEntry:routingEntry];
     [routingEntry release];
 }
@@ -80,10 +80,10 @@ static RequestRouter *s_singleton;
                                        connection:(RoutingHTTPConnection *)connection {
 	NSArray *pathComponents = [self pathComponentsWithPath:path];
 	__block NSObject<HTTPResponse> *response = nil;
-    for (RoutingEntry *routingEntry in _routingTable) {
+    for (id<RoutingEntry> routingEntry in _routingTable) {
         if( [routingEntry handlesPath:pathComponents] && [routingEntry supportsMethod:method] ){
-            // FIXME: make a real context
-            HTTPRequestContext *requestContext = [[HTTPRequestContext alloc] initWithRequest:connection.request];
+            HTTPRequestContext *requestContext = [[HTTPRequestContext alloc] initWithConnection:connection
+                                                                                 pathComponents:pathComponents];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 id<HTTPRequestHandler> handler = [[routingEntry newHandler] retain];
                 response = [[handler handleRequest:requestContext] retain];
@@ -116,7 +116,7 @@ static RequestRouter *s_singleton;
 - (BOOL) canHandlePostForPath:(NSString *)path{
 	NSArray *pathComponents = [self pathComponentsWithPath:path];
     
-    for (RoutingEntry *routingEntry in _routingTable) {
+    for (id<RoutingEntry> routingEntry in _routingTable) {
         if( [routingEntry handlesPath:pathComponents] ){
             return [routingEntry supportsMethod:@"POST"];
         }

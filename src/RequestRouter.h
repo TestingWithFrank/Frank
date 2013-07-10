@@ -22,7 +22,7 @@
 + (RequestRouter *)singleton;
 
 - (void) registerRoute: (id<Route>) route;
-- (void) registerRoutingEntry:(RoutingEntry *)routingEntry;
+- (void) registerRoutingEntry:(id<RoutingEntry>)routingEntry;
 - (void) registerRouteForPath:(NSString *)path
             supportingMethods:(NSArray *)methods
                     createdBy:(HandlerCreator)handlerClass;

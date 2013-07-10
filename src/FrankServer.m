@@ -10,7 +10,7 @@
 
 #import "HTTPServer.h"
 #import "RoutingHTTPConnection.h"
-#import "StaticResourcesRoute.h"
+#import "StaticResources.h"
 #import "DumpCommandRoute.h"
 #import "ImageCaptureRoute.h"
 #import "FrankCommandRoute.h"
@@ -61,6 +61,9 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
 			bundleName = [bundleName stringByAppendingString:@".bundle"];
         
         FrankCommandRoute *frankCommandRoute = [FrankCommandRoute singleton];
+
+        StaticResources *staticResources = [[[StaticResources alloc] initWithStaticResourceSubDir:bundleName] autorelease];
+        [[RequestRouter singleton]registerRoutingEntry:staticResources];
         
         [self handleGetAt:@"/device"
                      with:^{
@@ -100,9 +103,6 @@ static NSUInteger __defaultPort = FRANK_SERVER_PORT;
         
 		[[RequestRouter singleton] registerRoute:frankCommandRoute];
         
-		
-		StaticResourcesRoute *staticRoute = [[[StaticResourcesRoute alloc] initWithStaticResourceSubDir:bundleName] autorelease];
-		[[RequestRouter singleton] registerRoute:staticRoute];
         
         DumpCommandRoute *dumpCaptureCommand = [[[DumpCommandRoute alloc] init] autorelease];
 		[[RequestRouter singleton] registerRoute:dumpCaptureCommand];        

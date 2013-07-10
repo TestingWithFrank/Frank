@@ -9,37 +9,55 @@
 #import "HTTPRequestContext.h"
 
 #import "HTTPMessage.h"
+#import "HTTPFileResponse.h"
+#import "RoutingHTTPConnection.h"
 
 @interface HTTPRequestContext(){
-    HTTPMessage *_request;
+    RoutingHTTPConnection *_connection;
+    NSArray *_pathComponents;
 }
 
 @end
 
 @implementation HTTPRequestContext
 
-- (id)initWithRequest:(HTTPMessage *)request
+- (id)initWithConnection:(RoutingHTTPConnection*)connection
+          pathComponents:(NSArray *)pathComponents
 {
     self = [super init];
     if (self) {
-        _request = [request retain];
+        _connection = [connection retain];
+        _pathComponents = [pathComponents retain];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_request release];
+    [_connection release];
+    [_pathComponents release];
     [super dealloc];
 }
 
 - (BOOL) isMethod:(NSString *)method{
-    return( NSOrderedSame == [method compare:_request.method options:NSCaseInsensitiveSearch] );
+    return( NSOrderedSame == [method compare:_connection.request.method options:NSCaseInsensitiveSearch] );
+}
+
+- (HTTPConnection *)connection{
+    return _connection;
+}
+
+- (NSArray *)pathComponents{
+    return _pathComponents;
 }
 
 - (NSString *)bodyAsString{
     // UTF8 might be a bogus assumption, but it's unlikely to fail.
-    return [[[NSString alloc] initWithData:_request.body encoding:NSUTF8StringEncoding] autorelease];
+    return [[[NSString alloc] initWithData:_connection.request.body encoding:NSUTF8StringEncoding] autorelease];
+}
+
+- (HTTPFileResponse *) fileResponseForPath:(NSString *)path{
+    return [[HTTPFileResponse alloc] initWithFilePath:path forConnection:_connection];
 }
 
 @end

@@ -1,21 +1,21 @@
 //
-//  RoutingEntry.m
+//  FixedRoutingEntry.m
 //  Frank
 //
-//  Created by Pete Hodgson on 7/7/13.
+//  Created by Pete Hodgson on 7/10/13.
 //
 //
 
-#import "RoutingEntry.h"
+#import "FixedRoutingEntry.h"
 
-@interface RoutingEntry() {
+@interface FixedRoutingEntry() {
     NSString *_path;
     NSArray *_supportedMethods;
     HandlerCreator _handlerCreator;
 }
 @end
 
-@implementation RoutingEntry
+@implementation FixedRoutingEntry
 
 - (id)initForPath:(NSString *)path
 supportingMethods:(NSArray *)methods
@@ -35,7 +35,7 @@ supportingMethods:(NSArray *)methods
 {
     [_path release];
     [_supportedMethods release];
-
+    
     [super dealloc];
 }
 

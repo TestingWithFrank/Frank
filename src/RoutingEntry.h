@@ -19,15 +19,11 @@
 
 typedef NSObject<HTTPRequestHandler> *(^HandlerCreator)();
 
-@interface RoutingEntry : NSObject
 
-- (id)initForPath:(NSString *)path
-supportingMethods:(NSArray *)methods
-   createdBy:(HandlerCreator)handlerCreator;
+@protocol RoutingEntry
 
 - (BOOL)handlesPath:(NSArray *)pathComponents;
 - (BOOL)supportsMethod:(NSString *)method;
 - (NSObject<HTTPRequestHandler> *)newHandler;
-
 
 @end
