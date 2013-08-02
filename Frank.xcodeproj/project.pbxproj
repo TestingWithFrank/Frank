@@ -143,9 +143,7 @@
 		C110E49C178BDA6000CFE509 /* VersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E499178BDA5F00CFE509 /* VersionRoute.m */; };
 		C110E49D178BDA6000CFE509 /* VersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E499178BDA5F00CFE509 /* VersionRoute.m */; };
 		C110E4A0178BE43F00CFE509 /* OrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E49E178BE43C00CFE509 /* OrientationRoute.h */; };
-		C110E4A1178BE43F00CFE509 /* OrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E49E178BE43C00CFE509 /* OrientationRoute.h */; };
 		C110E4A2178BE43F00CFE509 /* OrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E49F178BE43E00CFE509 /* OrientationRoute.m */; };
-		C110E4A3178BE43F00CFE509 /* OrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E49F178BE43E00CFE509 /* OrientationRoute.m */; };
 		C110E4A6178DB58700CFE509 /* FixedRoutingEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E4A4178DB58000CFE509 /* FixedRoutingEntry.h */; };
 		C110E4A7178DB58700CFE509 /* FixedRoutingEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E4A4178DB58000CFE509 /* FixedRoutingEntry.h */; };
 		C110E4A8178DB58700CFE509 /* FixedRoutingEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E4A5178DB58400CFE509 /* FixedRoutingEntry.m */; };
@@ -875,7 +873,6 @@
 				C110E473178A11B900CFE509 /* DeviceRoute.h in Headers */,
 				C110E495178BD22100CFE509 /* BasicRoute.h in Headers */,
 				C110E49B178BDA6000CFE509 /* VersionRoute.h in Headers */,
-				C110E4A1178BE43F00CFE509 /* OrientationRoute.h in Headers */,
 				C110E4A7178DB58700CFE509 /* FixedRoutingEntry.h in Headers */,
 				C110E4AD178DB62100CFE509 /* StaticResources.h in Headers */,
 				30198DFB17936DCD00F686A7 /* FEXTableCell.h in Headers */,
@@ -1173,7 +1170,6 @@
 				C110E475178A11B900CFE509 /* DeviceRoute.m in Sources */,
 				C110E497178BD22100CFE509 /* BasicRoute.m in Sources */,
 				C110E49D178BDA6000CFE509 /* VersionRoute.m in Sources */,
-				C110E4A3178BE43F00CFE509 /* OrientationRoute.m in Sources */,
 				C110E4A9178DB58700CFE509 /* FixedRoutingEntry.m in Sources */,
 				C110E4AF178DB62100CFE509 /* StaticResources.m in Sources */,
 				30198DFC17936DCD00F686A7 /* FEXTableCell.m in Sources */,
