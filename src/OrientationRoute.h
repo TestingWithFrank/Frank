@@ -6,8 +6,8 @@
 //
 //
 
-#import "BasicRoute.h"
+#import "RoutingEntry.h"
 
-@interface OrientationRoute : BasicRoute
+@interface OrientationRoute : NSObject<HTTPRequestHandler>
 
 @end

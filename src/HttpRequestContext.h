@@ -12,6 +12,7 @@
 @class RoutingHTTPConnection;
 @class HTTPMessage;
 @class HTTPFileResponse;
+@class HTTPDataResponse;
 
 @interface HTTPRequestContext : NSObject
 
@@ -20,8 +21,16 @@
 
 - (HTTPConnection *)connection;
 - (BOOL) isMethod:(NSString *)method;
-- (NSString *)bodyAsString;
 - (NSArray *)pathComponents;
 
+- (NSString *)bodyAsString;
+- (NSDictionary *)bodyAsJsonDict;
+
+
 - (HTTPFileResponse *) fileResponseForPath:(NSString *)path;
+- (HTTPDataResponse *) responseWithStringBody:(NSString *)body;
+- (HTTPDataResponse *) responseWithJsonBody:(id)json;
+- (HTTPDataResponse *) successResponseWithoutResults;
+- (HTTPDataResponse *) errorResponseWithReason:(NSString *)reason andDetails:(NSString *)details;
+
 @end

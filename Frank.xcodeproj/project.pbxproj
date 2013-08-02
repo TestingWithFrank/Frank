@@ -134,10 +134,6 @@
 		C110E473178A11B900CFE509 /* DeviceRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E470178A11B700CFE509 /* DeviceRoute.h */; };
 		C110E474178A11B900CFE509 /* DeviceRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E471178A11B800CFE509 /* DeviceRoute.m */; };
 		C110E475178A11B900CFE509 /* DeviceRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E471178A11B800CFE509 /* DeviceRoute.m */; };
-		C110E494178BD22100CFE509 /* BasicRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E492178BD21E00CFE509 /* BasicRoute.h */; };
-		C110E495178BD22100CFE509 /* BasicRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E492178BD21E00CFE509 /* BasicRoute.h */; };
-		C110E496178BD22100CFE509 /* BasicRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E493178BD21F00CFE509 /* BasicRoute.m */; };
-		C110E497178BD22100CFE509 /* BasicRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E493178BD21F00CFE509 /* BasicRoute.m */; };
 		C110E49A178BDA6000CFE509 /* VersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E498178BDA5E00CFE509 /* VersionRoute.h */; };
 		C110E49B178BDA6000CFE509 /* VersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = C110E498178BDA5E00CFE509 /* VersionRoute.h */; };
 		C110E49C178BDA6000CFE509 /* VersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C110E499178BDA5F00CFE509 /* VersionRoute.m */; };
@@ -407,8 +403,6 @@
 		C110E46B178A0C5D00CFE509 /* HttpRequestContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestContext.m; sourceTree = "<group>"; };
 		C110E470178A11B700CFE509 /* DeviceRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceRoute.h; sourceTree = "<group>"; };
 		C110E471178A11B800CFE509 /* DeviceRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceRoute.m; sourceTree = "<group>"; };
-		C110E492178BD21E00CFE509 /* BasicRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicRoute.h; sourceTree = "<group>"; };
-		C110E493178BD21F00CFE509 /* BasicRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicRoute.m; sourceTree = "<group>"; };
 		C110E498178BDA5E00CFE509 /* VersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionRoute.h; sourceTree = "<group>"; };
 		C110E499178BDA5F00CFE509 /* VersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionRoute.m; sourceTree = "<group>"; };
 		C110E49E178BE43C00CFE509 /* OrientationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrientationRoute.h; sourceTree = "<group>"; };
@@ -747,8 +741,6 @@
 				C110E463178A043100CFE509 /* RoutingEntry.h */,
 				C110E46A178A0C5C00CFE509 /* HttpRequestContext.h */,
 				C110E46B178A0C5D00CFE509 /* HttpRequestContext.m */,
-				C110E492178BD21E00CFE509 /* BasicRoute.h */,
-				C110E493178BD21F00CFE509 /* BasicRoute.m */,
 				C110E470178A11B700CFE509 /* DeviceRoute.h */,
 				C110E471178A11B800CFE509 /* DeviceRoute.m */,
 				C110E498178BDA5E00CFE509 /* VersionRoute.h */,
@@ -871,7 +863,6 @@
 				C110E466178A043200CFE509 /* RoutingEntry.h in Headers */,
 				C110E46D178A0C5D00CFE509 /* HttpRequestContext.h in Headers */,
 				C110E473178A11B900CFE509 /* DeviceRoute.h in Headers */,
-				C110E495178BD22100CFE509 /* BasicRoute.h in Headers */,
 				C110E49B178BDA6000CFE509 /* VersionRoute.h in Headers */,
 				C110E4A7178DB58700CFE509 /* FixedRoutingEntry.h in Headers */,
 				C110E4AD178DB62100CFE509 /* StaticResources.h in Headers */,
@@ -920,7 +911,6 @@
 				C110E465178A043200CFE509 /* RoutingEntry.h in Headers */,
 				C110E46C178A0C5D00CFE509 /* HttpRequestContext.h in Headers */,
 				C110E472178A11B900CFE509 /* DeviceRoute.h in Headers */,
-				C110E494178BD22100CFE509 /* BasicRoute.h in Headers */,
 				C110E49A178BDA6000CFE509 /* VersionRoute.h in Headers */,
 				C110E4A0178BE43F00CFE509 /* OrientationRoute.h in Headers */,
 				C110E4A6178DB58700CFE509 /* FixedRoutingEntry.h in Headers */,
@@ -1168,7 +1158,6 @@
 				30E82E3517128AB500E5BC7C /* ResolutionCommand.m in Sources */,
 				C110E46F178A0C5D00CFE509 /* HttpRequestContext.m in Sources */,
 				C110E475178A11B900CFE509 /* DeviceRoute.m in Sources */,
-				C110E497178BD22100CFE509 /* BasicRoute.m in Sources */,
 				C110E49D178BDA6000CFE509 /* VersionRoute.m in Sources */,
 				C110E4A9178DB58700CFE509 /* FixedRoutingEntry.m in Sources */,
 				C110E4AF178DB62100CFE509 /* StaticResources.m in Sources */,
@@ -1303,7 +1292,6 @@
 				3078E33C175417AE0016889C /* NSObject+FrankAutomation.m in Sources */,
 				C110E46E178A0C5D00CFE509 /* HttpRequestContext.m in Sources */,
 				C110E474178A11B900CFE509 /* DeviceRoute.m in Sources */,
-				C110E496178BD22100CFE509 /* BasicRoute.m in Sources */,
 				C110E49C178BDA6000CFE509 /* VersionRoute.m in Sources */,
 				C110E4A2178BE43F00CFE509 /* OrientationRoute.m in Sources */,
 				C110E4A8178DB58700CFE509 /* FixedRoutingEntry.m in Sources */,

@@ -10,6 +10,7 @@
 
 #import "JSON.h"
 #import "HTTPDataResponse.h"
+#import "HttpRequestContext.h"
 
 @implementation DeviceRoute
 
@@ -34,7 +35,7 @@
     device = @"mac";
 #endif
     
-    return [self responseWithJsonBody:@{@"device":device}];
+    return [context responseWithJsonBody:@{@"device":device}];
 }
 
 @end

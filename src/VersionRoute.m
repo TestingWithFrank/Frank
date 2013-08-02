@@ -8,6 +8,7 @@
 
 #import "VersionRoute.h"
 #import "HTTPDataResponse.h"
+#import "HttpRequestContext.h"
 
 @implementation VersionRoute {
     NSString *_version;
@@ -29,7 +30,7 @@
 }
 
 -(NSObject<HTTPResponse> *) handleRequest:(HTTPRequestContext *)context{
-    return [self responseWithJsonBody:@{@"version":_version}];
+    return [context responseWithJsonBody:@{@"version":_version}];
 }
 
 @end

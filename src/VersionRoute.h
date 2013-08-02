@@ -6,8 +6,9 @@
 //
 //
 
-#import "BasicRoute.h"
+#import "RoutingEntry.h"
 
-@interface VersionRoute : BasicRoute
+@interface VersionRoute : NSObject<HTTPRequestHandler>
+
 - (id)initWithVersion:(NSString *)version;
 @end

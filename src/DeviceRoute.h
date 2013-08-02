@@ -6,8 +6,8 @@
 //
 //
 
-#import "BasicRoute.h"
+#import "RoutingEntry.h"
 
-@interface DeviceRoute : BasicRoute
+@interface DeviceRoute : NSObject<HTTPRequestHandler>
 
 @end

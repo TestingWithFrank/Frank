@@ -8,9 +8,13 @@
 
 #import "HTTPRequestContext.h"
 
+#import "AnyJSON.h"
+
 #import "HTTPMessage.h"
 #import "HTTPFileResponse.h"
+#import "HTTPDataResponse.h"
 #import "RoutingHTTPConnection.h"
+#import "FranklyProtocolHelper.h"
 
 @interface HTTPRequestContext(){
     RoutingHTTPConnection *_connection;
@@ -56,8 +60,30 @@
     return [[[NSString alloc] initWithData:_connection.request.body encoding:NSUTF8StringEncoding] autorelease];
 }
 
+- (NSDictionary *)bodyAsJsonDict{
+    return AnyJSONDecode(_connection.request.body, nil);
+}
+
 - (HTTPFileResponse *) fileResponseForPath:(NSString *)path{
     return [[HTTPFileResponse alloc] initWithFilePath:path forConnection:_connection];
+}
+
+-(HTTPDataResponse *)responseWithStringBody:(NSString *)body{
+    NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
+    return [[[HTTPDataResponse alloc] initWithData:data] autorelease];
+}
+
+-(HTTPDataResponse *)responseWithJsonBody:(id)json{
+    NSData *data = AnyJSONEncode(json, nil);
+    return [[[HTTPDataResponse alloc] initWithData:data] autorelease];
+}
+
+-(HTTPDataResponse *)successResponseWithoutResults{
+    return [self responseWithJsonBody:[FranklyProtocolHelper successResponseWithoutResults]];
+}
+
+-(HTTPDataResponse *)errorResponseWithReason:(NSString *)reason andDetails:(NSString *)details{
+    return [self responseWithJsonBody:[FranklyProtocolHelper errorResponseWithReason:reason andDetails:details]];
 }
 
 @end

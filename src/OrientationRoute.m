@@ -11,6 +11,7 @@
 #import <PublicAutomation/UIAutomationBridge.h>
 
 #import "HttpRequestContext.h"
+#import "HTTPDataResponse.h"
 
 @implementation OrientationRoute
 
@@ -56,16 +57,16 @@
 	}
 }
 
-- (HTTPDataResponse *)handleGet{
+- (HTTPDataResponse *)handleGet:(HTTPRequestContext *)context{
    	NSDictionary *orientationDescription = [self getOrientationRepresentationViaDevice];
     if( !orientationDescription )
         orientationDescription = [self getOrientationRepresentationViaStatusBar];
 	
-    return [self responseWithJsonBody:orientationDescription];
+    return [context responseWithJsonBody:orientationDescription];
 }
 
-- (HTTPDataResponse *)handlePost:(NSString *)requestBody{
-    requestBody = [requestBody lowercaseString];
+- (HTTPDataResponse *)handlePost:(HTTPRequestContext *)context{
+    NSString *requestBody = [[context bodyAsString] lowercaseString];
     
     UIDeviceOrientation requestedOrientation = UIDeviceOrientationUnknown;
     if( [requestBody isEqualToString:@"landscape_right"] ){
@@ -79,21 +80,21 @@
     }
     
     if( requestedOrientation == UIDeviceOrientationUnknown){
-        return [self errorResponseWithReason:@"unrecognized orientation"
+        return [context errorResponseWithReason:@"unrecognized orientation"
                                   andDetails:[NSString stringWithFormat:@"orientation '%@' is invalid. Use 'landscape_right','landscape_left','portrait', or 'portrait_upside_down'", requestBody]];
     }
     
     [UIAutomationBridge setOrientation:requestedOrientation];
     
-    return [self successResponseWithoutResults];
+    return [context successResponseWithoutResults];
 }
 
 -(NSObject<HTTPResponse> *) handleRequest:(HTTPRequestContext *)context{
     if( [context isMethod:@"GET"] ){
-        return [self handleGet];
-        
+        return [self handleGet:context];
+
     }else if( [context isMethod:@"POST"] ){
-        return [self handlePost:context.bodyAsString];
+        return [self handlePost:context];
     }else{
         return nil;
     }
