@@ -13,7 +13,7 @@
 #import "JSON.h"
 
 #if !TARGET_OS_IPHONE
-#include "NSApplication+FrankAutomation.h"
+#import "NSApplication+FrankAutomation.h"
 #endif
 
 @implementation DumpCommandRoute {
@@ -193,36 +193,9 @@
     }
 
 #else
-    if ([object isKindOfClass:[NSApplication class]]) {
-        NSApplication *application = (NSApplication*) object;
-        
-        NSMutableArray *descendants = [NSMutableArray array];
-        
-        [descendants addObjectsFromArray:[application windows]];
-        [descendants addObject:[application mainMenu]];
-        [descendants addObjectsFromArray:[[application FEX_menus] allObjects]];
-        
-        return descendants;
-    }
-    else if ([object isKindOfClass:[NSWindow class]]) {
-        return [NSArray arrayWithObject:[(NSWindow*) object contentView]];
-    }
-    else if ([object isKindOfClass:[NSMenu class]]) {
-        return [(NSMenu *) object itemArray];
-    }
-    else if ([object isKindOfClass:[NSMenuItem class]]) {
-        NSMutableArray *descendants = [NSMutableArray array];
-        
-        NSMenu *submenu = [(NSMenuItem*) object submenu];
-        
-        if (submenu != nil) {
-            [descendants addObject:submenu];
-        }
-        
-        return descendants;
-    }
-    else if ([object isKindOfClass:[NSView class]]) {
-        return [(NSView *) object subviews];
+    if ([object respondsToSelector: @selector(FEX_children)])
+    {
+        return [object performSelector: @selector(FEX_children)];
     }
 #endif
     
