@@ -13,8 +13,9 @@
 + (NSString *)generateErrorResponseWithReason:(NSString *)reason andDetails:(NSString *)details;
 
 + (NSDictionary *)successResponseWithoutResults;
-+ (NSString *)generateSuccessResponseWithoutResults;
++ (NSDictionary *)successResponseWithResults:(NSArray *)results;
 
++ (NSString *)generateSuccessResponseWithoutResults;
 + (NSString *)generateSuccessResponseWithResults:(NSArray *)results;
 
 

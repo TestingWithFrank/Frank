@@ -78,6 +78,7 @@ static RequestRouter *s_singleton;
 - (NSObject<HTTPResponse> *) handleRequestForPath:(NSString *)path
                                            method:(NSString *)method
                                        connection:(RoutingHTTPConnection *)connection {
+    NSLog( @"Handling %@ for %@", method, path );
 	NSArray *pathComponents = [self pathComponentsWithPath:path];
 	__block NSObject<HTTPResponse> *response = nil;
     for (id<RoutingEntry> routingEntry in _routingTable) {

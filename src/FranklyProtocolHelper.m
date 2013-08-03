@@ -23,16 +23,17 @@
 + (NSDictionary *)successResponseWithoutResults{
     return @{@"outcome":@"SUCCESS"};
 }
+
++ (NSDictionary *)successResponseWithResults:(NSArray *)results{
+    return @{@"outcome":@"SUCCESS",@"results":results};
+}
+
 + (NSString *)generateSuccessResponseWithoutResults{
 	return TO_JSON([self successResponseWithoutResults]);
 }
 
 + (NSString *)generateSuccessResponseWithResults:(NSArray *)results{
-	NSDictionary *response = [NSDictionary dictionaryWithObjectsAndKeys:
-							  @"SUCCESS", @"outcome",
-							  results, @"results",
-							  nil];
-	return TO_JSON(response);
+	return TO_JSON([self successResponseWithResults:results]);
 }
 
 @end

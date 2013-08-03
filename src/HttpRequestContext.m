@@ -55,6 +55,10 @@
     return _pathComponents;
 }
 
+- (NSDictionary *)queryParams {
+    return [_connection parseGetParams];
+}
+
 - (NSString *)bodyAsString{
     // UTF8 might be a bogus assumption, but it's unlikely to fail.
     return [[[NSString alloc] initWithData:_connection.request.body encoding:NSUTF8StringEncoding] autorelease];
@@ -80,6 +84,9 @@
 
 -(HTTPDataResponse *)successResponseWithoutResults{
     return [self responseWithJsonBody:[FranklyProtocolHelper successResponseWithoutResults]];
+}
+- (HTTPDataResponse *) successResponseWithResults:(NSArray *)results{
+    return [self responseWithJsonBody:[FranklyProtocolHelper successResponseWithResults:results]];
 }
 
 -(HTTPDataResponse *)errorResponseWithReason:(NSString *)reason andDetails:(NSString *)details{
