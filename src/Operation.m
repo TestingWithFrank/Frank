@@ -103,10 +103,30 @@
 		
 		// for some reason using [NSValue valueWithBytes:returnType] is creating instances of NSConcreteValue rather than NSValue, so 
 		//I'm fudging it here with case-by-case logic
-		if( !strcmp(returnType, @encode(BOOL)) ) {
-			returnValue = [NSNumber numberWithBool:*((BOOL*)buffer)];
-		}else if( !strcmp(returnType, @encode(NSInteger)) ) {
-			returnValue = [NSNumber numberWithInteger:*((NSInteger*)buffer)];
+		if( !strcmp(returnType, @encode(char)) ) {
+			returnValue = [NSNumber numberWithChar:*((char*)buffer)];
+		}else if( !strcmp(returnType, @encode(unsigned char)) ) {
+			returnValue = [NSNumber numberWithUnsignedChar:*((unsigned char*)buffer)];
+		}else if( !strcmp(returnType, @encode(short)) ) {
+			returnValue = [NSNumber numberWithShort:*((short*)buffer)];
+		}else if( !strcmp(returnType, @encode(unsigned short)) ) {
+			returnValue = [NSNumber numberWithUnsignedShort:*((unsigned short*)buffer)];
+		}else if( !strcmp(returnType, @encode(int)) ) {
+			returnValue = [NSNumber numberWithInt:*((int*)buffer)];
+		}else if( !strcmp(returnType, @encode(unsigned int)) ) {
+			returnValue = [NSNumber numberWithUnsignedInt:*((unsigned int*)buffer)];
+		}else if( !strcmp(returnType, @encode(long)) ) {
+			returnValue = [NSNumber numberWithLong:*((long*)buffer)];
+		}else if( !strcmp(returnType, @encode(unsigned long)) ) {
+			returnValue = [NSNumber numberWithUnsignedLong:*((unsigned long*)buffer)];
+		}else if( !strcmp(returnType, @encode(long long)) ) {
+			returnValue = [NSNumber numberWithLongLong:*((long long*)buffer)];
+		}else if( !strcmp(returnType, @encode(unsigned long long)) ) {
+			returnValue = [NSNumber numberWithUnsignedLongLong:*((unsigned long long*)buffer)];
+		}else if( !strcmp(returnType, @encode(float)) ) {
+			returnValue = [NSNumber numberWithFloat:*((float*)buffer)];
+		}else if( !strcmp(returnType, @encode(double)) ) {
+			returnValue = [NSNumber numberWithDouble:*((double*)buffer)];
 		} else {
 			returnValue = [NSValue valueWithBytes:buffer objCType:returnType];
 		}
