@@ -827,7 +827,7 @@ static const NSString* FEX_IndexAttribute = @"FEX_IndexAttribute";
     CGRect visibleRect = [self visibleRect];
     NSRange rowRange = [self rowsInRect: visibleRect];
     
-    for (NSUInteger rowNum = rowRange.location; rowNum < rowRange.length; ++rowNum)
+    for (NSUInteger rowNum = rowRange.location; rowNum < rowRange.location + rowRange.length; ++rowNum)
     {
         CGRect rowRect = [self rectOfRow: rowNum];
         rowRect = NSIntersectionRect(rowRect, visibleRect);
@@ -929,7 +929,7 @@ static const NSString* FEX_IndexAttribute = @"FEX_IndexAttribute";
     NSRange rowRange = [self rowsInRect: visibleRect];
     id<NSOutlineViewDataSource> dataSource = [self dataSource];
     
-    for (NSUInteger rowNum = rowRange.location; rowNum < rowRange.length; ++rowNum)
+    for (NSUInteger rowNum = rowRange.location; rowNum < rowRange.location + rowRange.length; ++rowNum)
     {
         NSView* rowView = [self rowViewAtRow: rowNum makeIfNecessary: NO];
         
