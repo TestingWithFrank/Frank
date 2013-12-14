@@ -36,14 +36,29 @@
 
 - (void)castNumber:(NSNumber *)number toType:(const char*)objCType intoBuffer:(void *)buffer{
 	// specific cases should be added here as needed
-	if( !strcmp(objCType, @encode(int)) ){
+    
+    if( !strcmp(objCType, @encode(char)) ) {
+        *((char *)buffer) = [number charValue];
+    }else if( !strcmp(objCType, @encode(unsigned char)) ) {
+        *((unsigned char *)buffer) = [number unsignedCharValue];
+    }else if( !strcmp(objCType, @encode(short)) ){
+		*((short *)buffer) = [number shortValue];
+	}else if( !strcmp(objCType, @encode(unsigned short)) ){
+		*((unsigned short *)buffer) = [number unsignedShortValue];
+	}else if( !strcmp(objCType, @encode(int)) ){
 		*((int *)buffer) = [number intValue];
-	}else if( !strcmp(objCType, @encode(uint)) ){
-		*((uint *)buffer) = [number unsignedIntValue];
+	}else if( !strcmp(objCType, @encode(unsigned int)) ){
+		*((unsigned int *)buffer) = [number unsignedIntValue];
+	}else if( !strcmp(objCType, @encode(long)) ){
+		*((long *)buffer) = [number longValue];
+	}else if( !strcmp(objCType, @encode(unsigned long)) ){
+		*((unsigned long *)buffer) = [number unsignedLongValue];
+	}else if( !strcmp(objCType, @encode(long long)) ){
+		*((long long *)buffer) = [number longLongValue];
+	}else if( !strcmp(objCType, @encode(unsigned long long)) ){
+		*((unsigned long long *)buffer) = [number unsignedLongLongValue];
 	}else if( !strcmp(objCType, @encode(double)) ){
 		*((double *)buffer) = [number doubleValue];
-	} else if ( !strcmp(objCType, @encode(char)) ) {
-		*((char*)buffer) = [number charValue];
 	} else if ( !strcmp(objCType, @encode(float)) ){
 		*((float *)buffer) = [number floatValue];
 	} else {
