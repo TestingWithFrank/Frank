@@ -709,14 +709,18 @@ static const NSString* FEX_ParentAttribute = @"FEX_ParentAttribute";
 - (void) FEX_scrollToTop
 {
     [[self contentView] scrollToPoint: CGPointZero];
+    
+    [self reflectScrolledClipView: [self contentView]];
 }
 
 - (void) FEX_scrollToBottom
 {
     CGPoint maxContentOffset = CGPointZero;
-    maxContentOffset.y = [self contentSize].height - [self frame].size.height;
+    maxContentOffset.y = [[self contentView] documentRect].size.height - [self frame].size.height;
     
     [[self contentView] scrollToPoint: maxContentOffset];
+    
+    [self reflectScrolledClipView: [self contentView]];
 }
 
 
@@ -724,6 +728,8 @@ static const NSString* FEX_ParentAttribute = @"FEX_ParentAttribute";
                              y: (NSInteger) y
 {
     [[self contentView] scrollToPoint: CGPointMake(x, y)];
+    
+    [self reflectScrolledClipView: [self contentView]];
 }
 
 @end
