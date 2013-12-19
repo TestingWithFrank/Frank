@@ -16,3 +16,6 @@
 [submodule "lib/AnyJSON"]
 	path = lib/AnyJSON
 	url = https://github.com/mattt/AnyJSON.git
+[submodule "lib/KIF"]
+	path = lib/KIF
+	url = https://github.com/kif-framework/KIF.git
