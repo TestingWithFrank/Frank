@@ -7,6 +7,8 @@ end
 
 Then /^I should be able to enter "(.*?)" correctly using the keyboard$/ do |text_to_type|
   step %Q|I type "#{text_to_type}" into the "Edit me" text field using the keyboard|
+  wait_for_nothing_to_be_animating
+  sleep 1
   
   expected_text = "text entered into text field: #{text_to_type}"
   check_element_exists( "view:'UILabel' text:'#{expected_text}'" )
