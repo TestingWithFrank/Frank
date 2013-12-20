@@ -1,6 +1,6 @@
 CAROUSEL_SELECTOR_FRAGMENT = "view:'Carousel'"
-PORTRAIT_IPHONE_WIDTH = 320
-PORTRAIT_IPHONE_HEIGHT = 480
+PORTRAIT_IPHONE_WIDTH = 640
+PORTRAIT_IPHONE_HEIGHT = 960
 
 When /^I page the carousel to the right$/ do
   frankly_map( "#{CAROUSEL_SELECTOR_FRAGMENT}", 'swipeInDirection:', 'left' )

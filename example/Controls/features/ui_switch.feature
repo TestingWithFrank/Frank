@@ -15,13 +15,3 @@ Feature:
 
 								When I swipe "the switch" rightwards
 								Then I should see "Switch is on"
-
-				Scenario: Swiping the switch up and down has no effect
-								Given I swipe "the switch" leftwards
-								And I should see "Switch is off"
-
-								When I swipe "the switch" upwards
-								Then I should see "Switch is off"
-
-								When I swipe "the switch" downwards
-								Then I should see "Switch is off"
