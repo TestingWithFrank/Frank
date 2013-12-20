@@ -13,6 +13,6 @@ Feature:
 		Then I should see "YES" 
 
 	Scenario: Long touch the main view at a specific point
-		When I douple tap "Double Tap View" at x "60" y "40"
+		When I douple tap "Double Tap View" at x "60" y "110"
 		Then I should see "YES"
-		And I should see "{60, 40}"
+		And I should see "{60, 110}"

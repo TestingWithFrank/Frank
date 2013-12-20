@@ -42,6 +42,7 @@
         imageView.tag = 100+i;
         [imageView setImage:[UIImage imageNamed:[self.images objectAtIndex:i]]];
         [imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [imageView setAccessibilityLabel:[self.images objectAtIndex:i]];
         [slide addSubview:imageView];
         [imageView release];
         

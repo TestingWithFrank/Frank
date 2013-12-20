@@ -17,6 +17,7 @@ When /^I put the table in edit mode$/ do
 end
 
 When /^I drag the "(.*?)" row down to the "(.*?)" row$/ do |drag_row_mark, dest_row_mark|
+  wait_for_nothing_to_be_animating
   drag_target_selector = %Q|tableViewCell label marked:'#{drag_row_mark}' parent tableViewCell view:'UITableViewCellReorderControl'|
   drag_dest_selector = %Q|tableViewCell label marked:'#{dest_row_mark}' parent tableViewCell view:'UITableViewCellReorderControl'|
 

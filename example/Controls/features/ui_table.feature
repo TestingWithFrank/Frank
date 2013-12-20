@@ -17,8 +17,7 @@ Scenario: delete with swipe
  Then I should see the confirm deletion button
  
  When I confirm table cell deletion
- Then I should not see the confirm deletion button
- And I should not see "Larry"
+ Then "Larry" should be scrolled off the left of the screen
  But I should see "Curly"
  And I should see "Moe"
 
@@ -28,9 +27,7 @@ Scenario: delete with edit mode
  Then I should see the confirm deletion button
 
  When I confirm table cell deletion
- Then I should not see the confirm deletion button
- 
- And I should not see "Moe"
+ Then "Moe" should be scrolled off the left of the screen
  But I should see "Larry"
  And I should see "Curly"
 
@@ -59,10 +56,10 @@ Scenario: scrolling up and down and all around
  
  When I scroll the table to the 3rd row
  Then I should see "Curly"
- But I should not see "Larry"
+ But "First Row" should be scrolled off the top of the screen
  
  When I scroll the table to the top
- Then I should see "First Row"
+ Then "First Row" should be visible on screen
 
 Scenario: rearranging rows
  Then the "Larry" row should be above the "Moe" row
