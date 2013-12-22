@@ -1,3 +1,5 @@
+require 'socket'
+require 'ipaddr'
 require 'timeout'
 require 'uri'
 
@@ -27,8 +29,11 @@ class Bonjour
 
       address = nil
       addr_service.getaddrinfo r.target do |addrinfo|
-        address = addrinfo.address
-        break
+        ipaddr = (IPAddr.new(addrinfo.address) rescue nil)
+        if ipaddr != nil and ipaddr.family == Socket::AF_INET
+          address = addrinfo.address
+          break
+        end
       end
 
       debug "first address for #{r.target} is #{address}"
@@ -41,7 +46,7 @@ class Bonjour
 
     DNSSD.browse! '_http._tcp.' do |reply|
       debug 'got a reply'
-      if reply.name == FRANK_SERVICE_NAME 
+      if reply.name == FRANK_SERVICE_NAME
         address = found_a_frank(reply)
         if address
           debug "OK WE HAVE AN ADDRESS: #{address}"
