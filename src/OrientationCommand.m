@@ -7,11 +7,12 @@
 //
 
 #import "OrientationCommand.h"
-
-#import <PublicAutomation/UIAutomationBridge.h>
 #import "FranklyProtocolHelper.h"
 #import "JSON.h"
 
+@interface UIApplication (Private)
+- (BOOL)rotateIfNeeded:(UIDeviceOrientation)orientation;
+@end
 
 @implementation OrientationCommand
 
@@ -106,7 +107,7 @@
                                                            andDetails:[NSString stringWithFormat:@"orientation '%@' is invalid. Use 'landscape_right','landscape_left','portrait', or 'portrait_upside_down'", requestBody]];
     }
 
-    [UIAutomationBridge setOrientation:requestedOrientation];
+    [[UIApplication sharedApplication] rotateIfNeeded:requestedOrientation];
     
     return [FranklyProtocolHelper generateSuccessResponseWithoutResults];
 }
