@@ -6,10 +6,18 @@
 //  Copyright (c) 2011 ThoughtWorks. All rights reserved.
 //
 
-#import <PublicAutomation/UIAutomationBridge.h>
-
 #import "LoadableCategory.h"
+#import "CGGeometry-KIFAdditions.h"
+#import "UIApplication-KIFAdditions.h"
+#import "UITouch-KIFAdditions.h"
+#import "UIView-KIFAdditions.h"
 MAKE_CATEGORIES_LOADABLE(UIView_PublicAutomation)
+
+@interface UIView ()
+
+- (UIEvent*) _eventWithTouch: (UITouch*) touch;
+
+@end
 
 NSString * formatCGPointVal(NSValue *val) {
     CGPoint p = [val CGPointValue];
@@ -160,7 +168,7 @@ NSString * formatCGPointVal(NSValue *val) {
         return NO;
     }
     
-    [UIAutomationBridge tapView:self atPoint:point];
+    [self tapAtPoint: point];
     return YES;
 }
 
@@ -175,7 +183,7 @@ NSString * formatCGPointVal(NSValue *val) {
         return NO;
     }
     
-    [UIAutomationBridge tapView:self atPoint:point];
+    [self tapAtPoint: point];
     
     return YES;
 }
@@ -194,7 +202,7 @@ NSString * formatCGPointVal(NSValue *val) {
         return NO;
     }
     
-    [UIAutomationBridge tapView:self atPoint:point];
+    [self tapAtPoint: point];
     
     return YES;
 }
@@ -209,7 +217,8 @@ NSString * formatCGPointVal(NSValue *val) {
         return NO;
     }
 	
-	[UIAutomationBridge doubleTapView:self atPoint:point];
+    [self tapAtPoint: point];
+    [self tapAtPoint: point];
 	return YES;
 }
 
@@ -242,7 +251,7 @@ NSString * formatCGPointVal(NSValue *val) {
         return NO;
     }
 	
-	[UIAutomationBridge longTapView:self atPoint:point forDuration:duration];
+    [self longPressAtPoint: point duration: duration];
 	return YES;
 }
 
@@ -273,15 +282,120 @@ NSString * formatCGPointVal(NSValue *val) {
 //TODO
 //-(void)swipeInDirection:(NSString *)dir by:(int)pixels {
 
+// THESE MAGIC NUMBERS ARE IMPORTANT. From experimentation it appears that too big or too small a ration leads to
+// gestures not being recognized as such by the system. For example setting the big ratio to 0.4 leads to
+// swipe-to-delete not working on UITableViewCells.
+// Also note that we always include at least a small component in each axes because in the past totally 'right-angled'
+//swipes weren't detected properly. But we were using a different approach to touch simulation then,
+//so this might now be unnecessary.
+#define BIG_RATIO (0.3)
+#define BIG_RATIO_IOS7 (0.4)
+#define SMALL_RATIO (0.05)
+#define SWIPE_DURATION (0.1)
 
-- (NSString *)swipeInDirection:(NSString *)strDir {
-    PADirection dir = [UIAutomationBridge parseDirection:strDir];
-    NSArray *swipeExtremes = [UIAutomationBridge swipeView:self inDirection:dir];
-    return [NSString stringWithFormat:@"%@ => %@", formatCGPointVal([swipeExtremes objectAtIndex:0]), formatCGPointVal([swipeExtremes objectAtIndex:1])];
+//returns what portion of the view to swipe along in the x and y axes.
++ (CGSize) swipeRatiosForDirection: (NSString*) direction
+{
+    CGFloat bigRatio = BIG_RATIO;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        bigRatio = BIG_RATIO_IOS7;
+    }
+    
+    if ([direction isEqualToString: @"left"])
+    {
+        return CGSizeMake(-bigRatio, SMALL_RATIO);
+    }
+    else if ([direction isEqualToString: @"right"])
+    {
+        return CGSizeMake(bigRatio, SMALL_RATIO);
+    }
+    else if ([direction isEqualToString: @"up"])
+    {
+        return CGSizeMake(SMALL_RATIO, -bigRatio);
+    }
+    else if ([direction isEqualToString: @"down"])
+    {
+        return CGSizeMake(SMALL_RATIO, bigRatio);
+    }
+    else
+    {
+        [NSException raise: @"invalid swipe direction" format: @"swipe direction '%@' is invalid", direction];
+        return CGSizeZero;
+    }
 }
 
-- (BOOL)FEX_dragWithInitialDelayToX:(CGFloat)x y:(CGFloat)y {
-    [UIAutomationBridge dragViewWithInitialDelay:self toPoint:CGPointMake(x,y)];
+- (BOOL) swipeInDirection: (NSString*) strDir
+{
+    
+    CGPoint swipeStart = CGPointCenteredInRect([self accessibilityFrame]);
+    CGSize ratios      = [[self class] swipeRatiosForDirection: strDir];
+    CGSize viewSize    = [self bounds].size;
+    CGPoint swipeEnd   = CGPointMake(swipeStart.x + (ratios.width  * viewSize.width),
+                                     swipeStart.y + (ratios.height * viewSize.height));
+    
+    return [self FEX_dragToX: swipeEnd.x y: swipeEnd.y duration: SWIPE_DURATION];
+}
+
+#define NUM_POINTS_IN_DRAG 50
+#define DRAG_TOUCH_DELAY 0.3
+
+- (BOOL)FEX_dragWithInitialDelayToX:(CGFloat)x y:(CGFloat)y
+{
+    return [self FEX_dragToX: x y: y duration: DRAG_TOUCH_DELAY];
+}
+
+- (BOOL) FEX_dragToX: (CGFloat) x y: (CGFloat) y duration: (CGFloat) duration
+{
+    CGPoint startPoint   = CGPointCenteredInRect([self accessibilityFrame]);
+    CGPoint displacement = CGPointMake(x - startPoint.x, y - startPoint.y);
+    
+    CGPoint *path = alloca(NUM_POINTS_IN_DRAG * sizeof(CGPoint));
+    
+    for (NSUInteger i = 0; i < NUM_POINTS_IN_DRAG; i++)
+    {
+        CGFloat progress = ((CGFloat)i)/(NUM_POINTS_IN_DRAG - 1);
+        path[i] = CGPointMake(startPoint.x + (progress * displacement.x),
+                              startPoint.y + (progress * displacement.y));
+    }
+    
+    UITouch* touch = [[UITouch alloc] initAtPoint: [self FEX_centerPoint] inView: self];
+    [touch setPhase:UITouchPhaseBegan];
+    
+    UIEvent* eventDown = [self _eventWithTouch: touch];
+    [[UIApplication sharedApplication] sendEvent: eventDown];
+    
+    CFRunLoopRunInMode(UIApplicationCurrentRunMode, duration, false);
+    
+    for (NSInteger pointIndex = 1; pointIndex < NUM_POINTS_IN_DRAG; ++pointIndex)
+    {
+        [touch setLocationInWindow: path[pointIndex]];
+        [touch setPhase: UITouchPhaseMoved];
+        
+        UIEvent *eventDrag = [self _eventWithTouch: touch];
+        [[UIApplication sharedApplication] sendEvent: eventDrag];
+        
+        CFRunLoopRunInMode(UIApplicationCurrentRunMode, 0.01, false);
+    }
+    
+    [touch setPhase: UITouchPhaseEnded];
+    
+    UIEvent* eventUp = [self _eventWithTouch: touch];
+    [[UIApplication sharedApplication] sendEvent: eventUp];
+    
+    if (touch.view == self && [self canBecomeFirstResponder])
+    {
+        [self becomeFirstResponder];
+    }
+    
+    while (UIApplicationCurrentRunMode != kCFRunLoopDefaultMode)
+    {
+        CFRunLoopRunInMode(UIApplicationCurrentRunMode, 0.1, false);
+    }
+    
+    [touch release];
+    
     return YES;
 }
 
