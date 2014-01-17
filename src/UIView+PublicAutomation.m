@@ -19,11 +19,6 @@ MAKE_CATEGORIES_LOADABLE(UIView_PublicAutomation)
 
 @end
 
-NSString * formatCGPointVal(NSValue *val) {
-    CGPoint p = [val CGPointValue];
-    return [NSString stringWithFormat:@"[%.2f, %.2f]", p.x, p.y];
-}
-
 @implementation UIView(PublicAutomation)
 
 #pragma mark - Utils
@@ -338,8 +333,8 @@ NSString * formatCGPointVal(NSValue *val) {
     return [self FEX_dragToX: swipeEnd.x y: swipeEnd.y duration: SWIPE_DURATION];
 }
 
-#define NUM_POINTS_IN_DRAG 50
 #define DRAG_TOUCH_DELAY 0.3
+#define DRAG_STEP 0.1
 
 - (BOOL)FEX_dragWithInitialDelayToX:(CGFloat)x y:(CGFloat)y
 {
@@ -348,27 +343,42 @@ NSString * formatCGPointVal(NSValue *val) {
 
 - (BOOL) FEX_dragToX: (CGFloat) x y: (CGFloat) y duration: (CGFloat) duration
 {
-    CGPoint startPoint   = CGPointCenteredInRect([self accessibilityFrame]);
-    CGPoint displacement = CGPointMake(x - startPoint.x, y - startPoint.y);
-    
-    CGPoint *path = alloca(NUM_POINTS_IN_DRAG * sizeof(CGPoint));
-    
-    for (NSUInteger i = 0; i < NUM_POINTS_IN_DRAG; i++)
+    CGPoint startPoint = CGPointCenteredInRect([self accessibilityFrame]);
+    return [self FEX_dragFromPoint: startPoint toPoint: CGPointMake(x, y) duration: duration delay: YES];
+}
+
+- (BOOL) FEX_dragFromPoint: (CGPoint) startPoint
+                   toPoint: (CGPoint) destPoint
+                  duration: (CGFloat) duration
+                     delay: (BOOL)    delay
+{
+    CGPoint displacement = CGPointMake(destPoint.x - startPoint.x, destPoint.y - startPoint.y);
+    NSUInteger numSteps = duration / DRAG_STEP;
+ 
+    if (numSteps < 2)
     {
-        CGFloat progress = ((CGFloat)i)/(NUM_POINTS_IN_DRAG - 1);
+        numSteps = 2;
+    }
+    
+    CGPoint *path = alloca(numSteps * sizeof(CGPoint));
+    
+    for (NSUInteger i = 0; i < numSteps; i++)
+    {
+        CGFloat progress = ((CGFloat)i)/(numSteps - 1);
         path[i] = CGPointMake(startPoint.x + (progress * displacement.x),
                               startPoint.y + (progress * displacement.y));
     }
     
-    UITouch* touch = [[UITouch alloc] initAtPoint: [self FEX_centerPoint] inView: self];
+    CGPoint touchPoint = [self convertPoint: startPoint fromView: nil];
+    UITouch* touch = [[UITouch alloc] initAtPoint: touchPoint inView: self];
     [touch setPhase:UITouchPhaseBegan];
     
     UIEvent* eventDown = [self _eventWithTouch: touch];
     [[UIApplication sharedApplication] sendEvent: eventDown];
     
-    CFRunLoopRunInMode(UIApplicationCurrentRunMode, duration, false);
+    CFRunLoopRunInMode(UIApplicationCurrentRunMode, delay ? DRAG_TOUCH_DELAY : 0.01, false);
     
-    for (NSInteger pointIndex = 1; pointIndex < NUM_POINTS_IN_DRAG; ++pointIndex)
+    for (NSInteger pointIndex = 1; pointIndex < numSteps; ++pointIndex)
     {
         [touch setLocationInWindow: path[pointIndex]];
         [touch setPhase: UITouchPhaseMoved];
@@ -376,7 +386,7 @@ NSString * formatCGPointVal(NSValue *val) {
         UIEvent *eventDrag = [self _eventWithTouch: touch];
         [[UIApplication sharedApplication] sendEvent: eventDrag];
         
-        CFRunLoopRunInMode(UIApplicationCurrentRunMode, 0.01, false);
+        CFRunLoopRunInMode(UIApplicationCurrentRunMode, DRAG_STEP, false);
     }
     
     [touch setPhase: UITouchPhaseEnded];
