@@ -223,7 +223,11 @@ Then /^switch "([^\"]*)" should be (on|off)$/ do |mark,expected_state|
   switch_states = frankly_map( selector, "isOn" )
 
   switch_states.each do |switch_state|
-    switch_state.should == expected_state
+    if switch_state
+      [true, 1].should include expected_state
+    else
+      [false, 0].should include expected_state
+    end
   end
 end
 
