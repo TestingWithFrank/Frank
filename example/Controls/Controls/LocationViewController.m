@@ -59,7 +59,13 @@
     [super viewDidUnload];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    self.locationLabel.text = [NSString stringWithFormat:@"Current Location: %f,%f", newLocation.coordinate.latitude, newLocation.coordinate.longitude];
+- (void) locationManager: (id) locationManager didUpdateLocations: (NSArray*) locations
+{
+    if ([locations count] > 0)
+    {
+        CLLocation* newLocation = [locations objectAtIndex: 0];
+        self.locationLabel.text = [NSString stringWithFormat:@"Current Location: %f,%f", newLocation.coordinate.latitude, newLocation.coordinate.longitude];
+    }
 }
+
 @end
