@@ -127,11 +127,11 @@ module FrankHelper
   # @raise an rspec exception if the assertion fails
   # @see #element_exists, #check_element_does_not_exist
   def check_element_exists( selector )
-    element_exists( selector ).should be_true
+    element_exists( selector ).should be_true, "Could not find element matching selector (#{selector})"
   end
 
   def check_element_exists_and_is_visible( selector )
-    element_is_not_hidden( selector ).should be_true
+    element_is_not_hidden( selector ).should be_true, "Could not find visible element matching selector (#{selector})"
   end
 
   # Assert whether there are no views in the current view heirarchy which match the specified selector.
@@ -139,11 +139,11 @@ module FrankHelper
   # @raise an rspec exception if the assertion fails
   # @see #element_exists, #check_element_exists
   def check_element_does_not_exist( selector )
-    element_exists( selector ).should be_false
+    element_exists( selector ).should be_false, "Found element matching selector when it should not exist (#{selector})"
   end
 
   def check_element_does_not_exist_or_is_not_visible( selector )
-    element_is_not_hidden( selector ).should be_false
+    element_is_not_hidden( selector ).should be_false, "Found visible element matching selector when it should not be visible (#{selector})"
   end
 
   # Indicate whether there are any views in the current view heirarchy which contain the specified accessibility label.
