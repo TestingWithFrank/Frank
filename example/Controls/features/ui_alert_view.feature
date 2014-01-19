@@ -13,12 +13,14 @@ Scenario Outline: Showing and dismissing the Alert View
 
 	When I touch "Show UIAlertView"
 	Then I should see "AlertView Title"
-	And I should see a button "Button1"
-	And I should see a button "Button 2"
+	And I should see "Button1"
+	And I should see "Button 2"
 
 	When I touch the alert view's "Ok" button
-  And I wait for nothing to be animating
+    And I wait for nothing to be animating
 	Then I should not see "AlertView Title"
+	And I should not see "Button1"
+	And I should not see "Button 2"
 
 Examples:
   | orientation | 
