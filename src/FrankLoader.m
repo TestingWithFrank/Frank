@@ -25,13 +25,13 @@ BOOL frankLogEnabled = NO;
 @implementation FrankLoader
 
 + (void)applicationDidBecomeActive:(NSNotification *)notification{
-#if TARGET_OS_IPHONE
-    FrankServer *server = [[FrankServer alloc] initWithDefaultBundle];
-    [server startServer];
-    
-#else
     static dispatch_once_t frankDidBecomeActiveToken;
-    
+#if TARGET_OS_IPHONE
+    dispatch_once(&frankDidBecomeActiveToken, ^{
+        FrankServer *server = [[FrankServer alloc] initWithDefaultBundle];
+        [server startServer];
+    });
+#else
     dispatch_once(&frankDidBecomeActiveToken, ^{
         FrankServer *server = [[FrankServer alloc] initWithDefaultBundle];
         [server startServer];
