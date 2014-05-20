@@ -25,14 +25,14 @@ end
 
 Then /^I wait to see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  wait_until( :timeout => 30, :message => "waited to see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
+  wait_until( :message => "waited to see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
     element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
   }
 end
 
 Then /^I wait to not see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  wait_until( :timeout => 30, :message => "waited to not see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
+  wait_until( :message => "waited to not see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
     !element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
   }
 end
