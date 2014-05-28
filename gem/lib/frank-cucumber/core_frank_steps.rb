@@ -18,16 +18,32 @@ Then /^I wait to not see "([^\"]*)"$/ do |expected_mark|
   }
 end
 
+def navigation_title_exists_with_text(quoted_text)
+  navFrame = frankly_map('view:"UINavigationBar"', 'frame').first
+  navCenter = navFrame["size"]["width"] / 2.0
+
+  frame = frankly_map("view:'UINavigationBar' view:'UINavigationItemView' marked:#{quoted_text}", 'frame').first
+  return false unless frame && frame["origin"] && frame["size"]
+
+  left = frame["origin"]["x"]
+  right = frame["origin"]["x"] + frame["size"]["width"]
+  return false unless left && right && left < right
+
+  (left < navCenter) && (navCenter < right)
+end
+
 Then /^I should see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  check_element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
+  quoted_text = "#{quote}#{expected_mark}#{quote}"
+  navigation_title_exists_with_text("#{quoted_text}").should be_true, "expected to see a navigation bar titled #{quoted_text}"
 end
 
 Then /^I wait to see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  wait_until( :timeout => 30, :message => "waited to see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
-    element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
-  }
+  quoted_text = "#{quote}#{expected_mark}#{quote}"
+  wait_until(message: "waited to see a navigation bar titled #{quoted_text}") do
+    navigation_title_exists_with_text("#{quoted_text}")
+  end
 end
 
 Then /^I wait to not see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
