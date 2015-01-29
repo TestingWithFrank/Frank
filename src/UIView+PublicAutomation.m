@@ -285,4 +285,9 @@ NSString * formatCGPointVal(NSValue *val) {
     return YES;
 }
 
+- (BOOL)FEX_dragWithInitialDelayToX:(CGFloat)x y:(CGFloat)y duration:(NSTimeInterval)duration {
+    [UIAutomationBridge dragViewWithInitialDelay:self toPoint:CGPointMake(x,y) duration:duration];
+    return YES;
+}
+
 @end
