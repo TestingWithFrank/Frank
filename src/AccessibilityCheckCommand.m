@@ -29,15 +29,15 @@
 
 #if __MAC_OS_X_VERSION_MAX_ALLOWED < 1090
 
-extern Boolean AXIsProcessTrustedWithOptions(CFDictionaryRef options);
-extern CFStringRef kAXTrustedCheckOptionPrompt;
+extern Boolean AXIsProcessTrustedWithOptions(CFDictionaryRef options) __attribute__((weak_import));
+extern CFStringRef kAXTrustedCheckOptionPrompt __attribute__((weak_import));
 
 #endif // __MAC_OS_X_VERSION_MAX_ALLOWED < 1090
 
 + (BOOL) accessibilitySeemsToBeTurnedOn {
     BOOL returnValue = NO;
     
-    if (AXIsProcessTrusted != NULL)
+    if (AXIsProcessTrustedWithOptions != NULL)
     {
         NSDictionary* options = @{ (id) kAXTrustedCheckOptionPrompt : @YES };
         return AXIsProcessTrustedWithOptions((CFDictionaryRef) options);

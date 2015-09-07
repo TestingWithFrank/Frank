@@ -20,19 +20,19 @@ end
 
 Then /^I should see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  check_element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
+  quoted_text = "#{quote}#{expected_mark}#{quote}"
+  navigation_title_exists_with_text("#{quoted_text}").should be_true, "expected to see a navigation bar titled #{quoted_text}"
 end
 
-Then /^I wait to see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
-  quote = get_selector_quote(expected_mark)
-  wait_until( :timeout => 30, :message => "waited to see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
-    element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
-  }
+Then /^I wait to see a navigation bar titled "([^\"]*)"$/ do |expected_title|
+  wait_until(message: "waited to see a navigation bar titled #{quoted_text}") do
+    navigation_title_with_text_exists(expected_title)
+  end
 end
 
 Then /^I wait to not see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  wait_until( :timeout => 30, :message => "waited to not see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
+  wait_until( :message => "waited to not see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
     !element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
   }
 end

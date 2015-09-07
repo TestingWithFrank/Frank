@@ -167,6 +167,7 @@ module Frank
     desc "launch", "open the Frankified app in the simulator"
     method_option :debug, :type => :boolean, :default => false
     method_option :idiom, :banner => 'iphone|ipad', :type => :string, :default => (ENV['FRANK_SIM_IDIOM'] || 'iphone')
+    method_option :sdk, :type => :string, :default => nil
     def launch
       $DEBUG = options[:debug]
       version = case options[:idiom].downcase
@@ -188,7 +189,7 @@ module Frank
 
         say "LAUNCHING APP..."
 
-        launch_app(frankified_app_dir, nil, version, false)
+        launch_app(frankified_app_dir, options[:sdk], version, false)
       end
     end
 
