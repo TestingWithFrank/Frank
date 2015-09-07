@@ -58,15 +58,15 @@
 	for (FrankMapViewType *view in viewsToMap) {
 		@try {
 			id result = [self performOperation:operation onView:view];
-			NSString *result = [ViewJSONSerializer jsonify:result];
+			NSString *resultValue = [ViewJSONSerializer jsonify:result];
 
 			// Can't add nil objects to an array.
-			if(result == nil)
+			if(resultValue == nil)
 			{
-				result = @"";
+				resultValue = @"";
 			}
 
-			[results addObject:result];
+			[results addObject:resultValue];
 		}
 		@catch (NSException * e) {
 			NSLog( @"Exception while performing operation %@\n%@", operation, e );
