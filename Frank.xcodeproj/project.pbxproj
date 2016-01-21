@@ -200,6 +200,13 @@
 			remoteGlobalIDString = 305CA782164205F800C4ACE5;
 			remoteInfo = CocoaHTTPServerMac;
 		};
+		3092C0F3189EF7EB00371BF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18A5F16160D528C00DC25F6 /* PublicAutomation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C194253715D838BD004FC314;
+			remoteInfo = PublicAutomation;
+		};
 		65DBDDB616A89D97007D3D43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
@@ -1073,6 +1080,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3092C0F4189EF7EB00371BF9 /* PBXTargetDependency */,
 				ABA9E46815C81C8D00112290 /* PBXTargetDependency */,
 			);
 			name = Frank;
@@ -1310,6 +1318,11 @@
 			target = 305CA782164205F800C4ACE5 /* CocoaHTTPServerMac */;
 			targetProxy = 30228E1D1642146F00B1F9E7 /* PBXContainerItemProxy */;
 		};
+		3092C0F4189EF7EB00371BF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PublicAutomation;
+			targetProxy = 3092C0F3189EF7EB00371BF9 /* PBXContainerItemProxy */;
+		};
 		65DBDDB716A89D97007D3D43 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65DBDD7216A89CCA007D3D43 /* CocoaAsyncSocket */;
@@ -1342,7 +1355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/Frank.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1351,6 +1364,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = src/Frank_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1358,7 +1372,7 @@
 				);
 				PRODUCT_NAME = Frank;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = lib/Shelley/Shelley;
+				USER_HEADER_SEARCH_PATHS = "lib/Shelley/Shelley lib/PublicAutomation\"";
 			};
 			name = Debug;
 		};
@@ -1366,10 +1380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					"$(ARCHS_STANDARD_32_BIT)",
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/Frank.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1382,14 +1393,14 @@
 				);
 				PRODUCT_NAME = Frank;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = lib/Shelley/Shelley;
+				USER_HEADER_SEARCH_PATHS = "lib/Shelley/Shelley lib/PublicAutomation\"";
 			};
 			name = Release;
 		};
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1403,7 +1414,7 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

@@ -25,13 +25,13 @@ BOOL frankLogEnabled = NO;
 @implementation FrankLoader
 
 + (void)applicationDidBecomeActive:(NSNotification *)notification{
-#if TARGET_OS_IPHONE
-    FrankServer *server = [[FrankServer alloc] initWithDefaultBundle];
-    [server startServer];
-    
-#else
     static dispatch_once_t frankDidBecomeActiveToken;
-    
+#if TARGET_OS_IPHONE
+    dispatch_once(&frankDidBecomeActiveToken, ^{
+        FrankServer *server = [[FrankServer alloc] initWithDefaultBundle];
+        [server startServer];
+    });
+#else
     dispatch_once(&frankDidBecomeActiveToken, ^{
         FrankServer *server = [[FrankServer alloc] initWithDefaultBundle];
         [server startServer];
@@ -86,6 +86,26 @@ BOOL frankLogEnabled = NO;
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:notificationName
                                                object:nil];
+
+#if TARGET_OS_IPHONE
+    NSArray *iOSVersionComponents = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    int majorVersion = [[iOSVersionComponents objectAtIndex:0] intValue];
+
+    if (majorVersion >= 9) 
+    { 
+        // iOS9 is installed. The UIApplicationDidBecomeActiveNotification may have been fired *before* 
+        // this code is called.
+        // See also:
+        // http://stackoverflow.com/questions/31785878/ios-9-uiapplicationdidbecomeactivenotification-callback-not-called
+
+        // Call applicationDidBecomeActive: after 0.5 second. 
+        // Delay execution of my block for 10 seconds.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 500 * USEC_PER_SEC), dispatch_get_main_queue(), ^{
+            NSLog(@"Forcefully invoking applicationDidBecomeActive");
+            [FrankLoader applicationDidBecomeActive:nil];
+        });
+    }
+#endif
 }
 
 @end

@@ -20,19 +20,19 @@ end
 
 Then /^I should see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  check_element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
+  quoted_text = "#{quote}#{expected_mark}#{quote}"
+  navigation_title_exists_with_text("#{quoted_text}").should be_true, "expected to see a navigation bar titled #{quoted_text}"
 end
 
-Then /^I wait to see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
-  quote = get_selector_quote(expected_mark)
-  wait_until( :timeout => 30, :message => "waited to see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
-    element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
-  }
+Then /^I wait to see a navigation bar titled "([^\"]*)"$/ do |expected_title|
+  wait_until(message: "waited to see a navigation bar titled #{quoted_text}") do
+    navigation_title_with_text_exists(expected_title)
+  end
 end
 
 Then /^I wait to not see a navigation bar titled "([^\"]*)"$/ do |expected_mark|
   quote = get_selector_quote(expected_mark)
-  wait_until( :timeout => 30, :message => "waited to not see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
+  wait_until( :message => "waited to not see a navigation bar titled #{quote}#{expected_mark}#{quote}" ) {
     !element_exists( "navigationItemView marked:#{quote}#{expected_mark}#{quote}" )
   }
 end
@@ -66,7 +66,11 @@ Then /I should not see the following:/ do |table|
 end
 
 Then /^I should see an alert view titled "([^\"]*)"$/ do |expected_mark|
-  values = frankly_map( 'alertView', 'title')
+  if frankly_os_version.to_f >= 7.0
+    values = frankly_map( "view:'_UIModalItemRepresentationView' label", 'text')
+  else
+    values = frankly_map( 'alertView', 'title')
+  end
   values.should include(expected_mark)
 end
 
@@ -76,7 +80,11 @@ Then /^I should see an alert view with the message "([^\"]*)"$/ do |expected_mar
 end
 
 Then /^I should not see an alert view$/ do
-  check_element_does_not_exist( 'alertView' )
+  if frankly_os_version.to_f >= 7.0
+    check_element_does_not_exist( '_UIModalItemRepresentationView' ) 
+  else
+    check_element_does_not_exist( 'alertView' )
+  end
 end
 
 Then /^I should see an element of class "([^\"]*)" with name "([^\"]*)" with the following labels: "([^\"]*)"$/ do |className, classLabel, listOfLabels|

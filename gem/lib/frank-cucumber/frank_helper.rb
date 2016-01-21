@@ -155,6 +155,25 @@ module FrankHelper
     element_exists( "view marked:#{quote}#{expected_mark}#{quote}" )
   end
 
+  # Indicate whether the title of the navigation bar matches the expected title.
+  # @param [String] expected_title the expected title of the navigation bar
+  # @return [Boolean]
+  def navigation_title_with_text_exists(expected_title)
+    quoted_text = "#{quote}#{expected_title}#{quote}"
+
+    navFrame = frankly_map('view:"UINavigationBar"', 'frame').first
+    navCenter = navFrame["size"]["width"] / 2.0
+
+    frame = frankly_map("view:'UINavigationBar' view:'UINavigationItemView' marked:#{quoted_text}", 'frame').first
+    return false unless frame && frame["origin"] && frame["size"]
+
+    left = frame["origin"]["x"]
+    right = frame["origin"]["x"] + frame["size"]["width"]
+    return false unless left && right && left < right
+
+    (left < navCenter) && (navCenter < right)
+  end
+
   # Assert whether there are any views in the current view heirarchy which contain the specified accessibility label.
   # @param [String] expected_mark the expected accessibility label
   # @raise an rspec exception if the assertion fails
@@ -173,6 +192,26 @@ module FrankHelper
     check_element_does_not_exist( "view marked:#{quote}#{expected_mark}#{quote}" )
   end
 
+  # Assert the title of the navigation bar.
+  # @param [String] expected_title the expected title of the navigation bar
+  # @raise an rspec exception if the assertion fails
+  # @raise an rspec exception if the navigation bar and its subview `UINavigationItemView` cannot be found
+  # @raise an rspec exception if the `UINavigationItemView` does not cover the center x of the navigation bar
+  def check_navigation_title_with_text_exists(expected_title)
+    quoted_text = "#{quote}#{expected_title}#{quote}"
+
+    navFrame = frankly_map('view:"UINavigationBar"', 'frame').first
+    navCenter = navFrame["size"]["width"] / 2.0
+
+    frame = frankly_map("view:'UINavigationBar' view:'UINavigationItemView' marked:#{quoted_text}", 'frame').first
+    raise "Could not find navigation bar with title (#{expected_title})" unless frame && frame["origin"] && frame["size"]
+
+    left = frame["origin"]["x"]
+    right = frame["origin"]["x"] + frame["size"]["width"]
+    raise "Expected title (#{expected_title}) not in center of navigation bar" unless left && right && left < right
+
+    ((left < navCenter) && (navCenter < right)).should be_true, "Could not find navigation title in center of navigation bar matching text (#{expected_title})"
+  end
 
   # Waits for any of the specified selectors to match a view.
   #
