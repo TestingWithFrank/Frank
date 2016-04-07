@@ -63,6 +63,10 @@ BOOL frankLogEnabled = NO;
     
     void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
     
+    if(!appSupportLibrary) {
+         NSLog(@"Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
+    }
+
     CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");
     
     if (copySharedResourcesPreferencesDomainForDomain) {
@@ -71,9 +75,38 @@ BOOL frankLogEnabled = NO;
         if (accessibilityDomain) {
             CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
             CFRelease(accessibilityDomain);
+            NSLog(@"Successfully updated the ApplicationAccessibilityEnabled value.");
+        }
+        else {
+            NSLog(@"Unable to copy accessibility preferences. Cannot automatically enable accessibility.");
         }
     }
-    
+    else {
+        NSLog(@"Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. Cannot automatically enable accessibility.");
+    }
+
+    NSString* accessibilitySettingsBundleLocation = @"/System/Library/PreferenceBundles/AccessibilitySettings.bundle/AccessibilitySettings";
+
+    if (simulatorRoot) {
+        accessibilitySettingsBundleLocation = [simulatorRoot stringByAppendingString:accessibilitySettingsBundleLocation];
+    }
+
+    const char *accessibilitySettingsBundlePath = [accessibilitySettingsBundleLocation fileSystemRepresentation];
+    void* accessibilitySettingsBundle = dlopen(accessibilitySettingsBundlePath, RTLD_LAZY);
+
+    if (accessibilitySettingsBundle) {
+        Class axSettingsPrefControllerClass = NSClassFromString(@"AccessibilitySettingsController");
+        id axSettingPrefController = [[axSettingsPrefControllerClass alloc] init];
+
+        id initialAccessibilityInspectorSetting = [axSettingPrefController AXInspectorEnabled:nil];
+        [axSettingPrefController setAXInspectorEnabled:@(YES) specifier:nil];
+
+        NSLog(@"Successfully enabled the AXInspector.");
+    }
+    else {
+        NSLog(@"Unable to dlopen AccessibilitySettings. Cannout automatically enable accessibility.");
+    }
+
     [autoreleasePool drain];
     
 #if TARGET_OS_IPHONE
