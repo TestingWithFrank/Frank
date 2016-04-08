@@ -63,6 +63,10 @@ BOOL frankLogEnabled = NO;
     
     void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
     
+    if(!appSupportLibrary) {
+         NSLog(@"Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
+    }
+
     CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");
     
     if (copySharedResourcesPreferencesDomainForDomain) {
@@ -71,9 +75,38 @@ BOOL frankLogEnabled = NO;
         if (accessibilityDomain) {
             CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
             CFRelease(accessibilityDomain);
+            NSLog(@"Successfully updated the ApplicationAccessibilityEnabled value.");
+        }
+        else {
+            NSLog(@"Unable to copy accessibility preferences. Cannot automatically enable accessibility.");
         }
     }
-    
+    else {
+        NSLog(@"Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. Cannot automatically enable accessibility.");
+    }
+
+    NSString* accessibilitySettingsBundleLocation = @"/System/Library/PreferenceBundles/AccessibilitySettings.bundle/AccessibilitySettings";
+
+    if (simulatorRoot) {
+        accessibilitySettingsBundleLocation = [simulatorRoot stringByAppendingString:accessibilitySettingsBundleLocation];
+    }
+
+    const char *accessibilitySettingsBundlePath = [accessibilitySettingsBundleLocation fileSystemRepresentation];
+    void* accessibilitySettingsBundle = dlopen(accessibilitySettingsBundlePath, RTLD_LAZY);
+
+    if (accessibilitySettingsBundle) {
+        Class axSettingsPrefControllerClass = NSClassFromString(@"AccessibilitySettingsController");
+        id axSettingPrefController = [[axSettingsPrefControllerClass alloc] init];
+
+        id initialAccessibilityInspectorSetting = [axSettingPrefController AXInspectorEnabled:nil];
+        [axSettingPrefController setAXInspectorEnabled:@(YES) specifier:nil];
+
+        NSLog(@"Successfully enabled the AXInspector.");
+    }
+    else {
+        NSLog(@"Unable to dlopen AccessibilitySettings. Cannout automatically enable accessibility.");
+    }
+
     [autoreleasePool drain];
     
 #if TARGET_OS_IPHONE
@@ -86,6 +119,26 @@ BOOL frankLogEnabled = NO;
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:notificationName
                                                object:nil];
+
+#if TARGET_OS_IPHONE
+    NSArray *iOSVersionComponents = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    int majorVersion = [[iOSVersionComponents objectAtIndex:0] intValue];
+
+    if (majorVersion >= 9) 
+    { 
+        // iOS9 is installed. The UIApplicationDidBecomeActiveNotification may have been fired *before* 
+        // this code is called.
+        // See also:
+        // http://stackoverflow.com/questions/31785878/ios-9-uiapplicationdidbecomeactivenotification-callback-not-called
+
+        // Call applicationDidBecomeActive: after 0.5 second. 
+        // Delay execution of my block for 10 seconds.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 500 * USEC_PER_SEC), dispatch_get_main_queue(), ^{
+            NSLog(@"Forcefully invoking applicationDidBecomeActive");
+            [FrankLoader applicationDidBecomeActive:nil];
+        });
+    }
+#endif
 }
 
 @end
