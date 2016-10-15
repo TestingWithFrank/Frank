@@ -6,7 +6,7 @@ Frank is 'Selenium for native iOS apps'. It allows you to write automated accept
 Learn More
 ----
 
-[The Frank website](http://www.testingwithfrank.com) is your best resource. You'll find documentation, screencasts, video recordings of presentations, and links to further resources.
+[The Frank website](http://testingwithfrank.github.io) is your best resource. You'll find documentation, screencasts, video recordings of presentations, and links to further resources.
 
 
 Getting Started
